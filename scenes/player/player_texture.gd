@@ -8,7 +8,9 @@ func animate(direction: Vector2) -> void:
 	verify_position(direction)
 	
 	if direction.y != 0: vertical_behavior(direction)
-	elif player.landing == true: animation.play("landing")
+	elif player.landing == true: 
+		animation.play("landing")
+		player.set_physics_process(false)
 	else: horizontal_behavior(direction)
 
 func verify_position(direction: Vector2) -> void:
@@ -23,7 +25,7 @@ func vertical_behavior(direction: Vector2) -> void:
 		animation.play("fall")
 	if direction.y < 0:
 		animation.play("jump")
-	
+
 func horizontal_behavior(direction: Vector2) -> void:
 	if direction.x != 0:
 		animation.play("run")
@@ -31,4 +33,7 @@ func horizontal_behavior(direction: Vector2) -> void:
 		animation.play("idle")
 
 func _on_animation_finished(anim_name: String):
-	pass
+	match anim_name:
+		"landing":
+			player.landing = false
+			player.set_physics_process(true)
