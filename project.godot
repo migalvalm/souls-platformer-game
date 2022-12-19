@@ -14,6 +14,36 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/env/background.gd"
 }, {
+"base": "Area2D",
+"class": "CollisionArea",
+"language": "GDScript",
+"path": "res://scripts/enemy/collision_area.gd"
+}, {
+"base": "Area2D",
+"class": "DetectionArea",
+"language": "GDScript",
+"path": "res://scripts/enemy/detection_area.gd"
+}, {
+"base": "Area2D",
+"class": "EnemyAttackArea",
+"language": "GDScript",
+"path": "res://scripts/enemy/attack_area.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "EnemyTemplate",
+"language": "GDScript",
+"path": "res://scripts/enemy/enemy_template.gd"
+}, {
+"base": "Sprite",
+"class": "EnemyTexture",
+"language": "GDScript",
+"path": "res://scripts/enemy/enemy_texture.gd"
+}, {
+"base": "Node2D",
+"class": "Level",
+"language": "GDScript",
+"path": "res://scripts/management/level.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
@@ -28,12 +58,24 @@ _global_script_classes=[ {
 "class": "PlayerTexture",
 "language": "GDScript",
 "path": "res://scripts/player/player_texture.gd"
+}, {
+"base": "EnemyTexture",
+"class": "WhaleTexture",
+"language": "GDScript",
+"path": "res://scripts/enemy/whale/texture.gd"
 } ]
 _global_script_class_icons={
 "Background": "",
+"CollisionArea": "",
+"DetectionArea": "",
+"EnemyAttackArea": "",
+"EnemyTemplate": "",
+"EnemyTexture": "",
+"Level": "",
 "Player": "",
 "PlayerStats": "",
-"PlayerTexture": ""
+"PlayerTexture": "",
+"WhaleTexture": ""
 }
 
 [application]
@@ -86,6 +128,13 @@ crouch={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="Tile"
+2d_physics/layer_2="SlideTile"
+2d_physics/layer_3="Player"
+2d_physics/layer_4="Enemy"
 
 [physics]
 

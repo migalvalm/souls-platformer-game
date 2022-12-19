@@ -1,6 +1,8 @@
 extends Sprite
 class_name PlayerTexture
 
+signal game_over
+
 var suffix: String = "_right"
 var normal_attack: bool = false
 var shield_off: bool = false
@@ -97,3 +99,5 @@ func _on_animation_finished(anim_name: String):
 				
 			if player.crouching:
 				animation.play("crouch")
+		"death":
+			emit_signal("game_over")

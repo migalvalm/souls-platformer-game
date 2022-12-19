@@ -7,6 +7,9 @@ class_name PlayerStats
 #####
 
 export(NodePath) onready var player = get_node(player) as KinematicBody2D
+export(NodePath) onready var collision_area = get_node(collision_area) as Area2D
+
+onready var invencibility_timer: Timer = get_node("InvencibilityTimer")
 
 var base_health: int = 15
 var base_mana: int = 10
@@ -41,6 +44,7 @@ var level_dict: Dictionary = {
 	"9": 356,
 }
 
+
 func _ready() -> void:
 	current_mana = base_mana + bonus_mana
 	max_mana = current_mana
@@ -62,7 +66,7 @@ func update_exp(value: int) -> void:
 func on_level_up() -> void:
 	current_mana = base_mana + bonus_mana
 	current_health = base_health + bonus_health
-	
+
 func get_current_level_max_xp() -> int:
 	return level_dict[str(level)]
 
@@ -91,7 +95,7 @@ func verify_shield(value: int) -> void:
 		
 	else:
 		current_health -= value
-		
+
 # Mana State Management
 func update_mana(type: String, value: int) -> void:
 	match type:
@@ -102,6 +106,16 @@ func update_mana(type: String, value: int) -> void:
 		"Decrease":
 			current_mana -= value
 
-func _process(delta):
-	if Input.is_action_just_pressed("ui_cancel"):
-		update_health("Decrease", 5)
+# Helpers
+func player_attack() -> int:
+	return base_attack + bonus_attack
+
+# Signals
+func on_collision_area_entered(area):
+	if area.name == "EnemyAttackArea":
+		update_health("Decrease", area.damage)
+		collision_area.set_deferred("monitoring", false)
+		invencibility_timer.start(area.invencibility_timer)
+
+func on_invencibility_timer_timeout() -> void:
+	collision_area.set_deferred("monitoring", true)

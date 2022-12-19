@@ -71,6 +71,18 @@ tracks/4/keys = {
 "update": 0,
 "values": [ false ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath(".:collision_layer")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 4 ]
+}
 
 [sub_resource type="RectangleShape2D" id=8]
 
@@ -232,6 +244,18 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:collision_layer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -423,6 +447,8 @@ tracks/1/keys = {
 }
 
 [node name="Player" type="KinematicBody2D"]
+collision_layer = 4
+collision_mask = 3
 script = ExtResource( 2 )
 speed = 75
 jump_speed = -175
@@ -467,6 +493,8 @@ drag_margin_h_enabled = true
 drag_margin_v_enabled = true
 
 [node name="AttackArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
 
 [node name="Collision" type="CollisionShape2D" parent="AttackArea"]
 shape = SubResource( 8 )
@@ -474,6 +502,7 @@ shape = SubResource( 8 )
 [node name="WallRay" type="RayCast2D" parent="."]
 enabled = true
 cast_to = Vector2( 5.2, 0 )
+collision_mask = 3
 
 [node name="Light2D" type="Light2D" parent="."]
 texture = ExtResource( 4 )
@@ -489,6 +518,19 @@ anims/light_animation = SubResource( 15 )
 [node name="Stats" type="Node" parent="."]
 script = ExtResource( 5 )
 player = NodePath("..")
+collision_area = NodePath("../CollisionArea")
+
+[node name="InvencibilityTimer" type="Timer" parent="Stats"]
+one_shot = true
+
+[node name="CollisionArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="Collision" type="CollisionShape2D" parent="CollisionArea"]
+position = Vector2( -1, 12.5 )
+shape = SubResource( 7 )
 
 [connection signal="animation_finished" from="Animation" to="Texture" method="_on_animation_finished"]
-[connection signal="animation_started" from="Animation" to="Texture" method="_on_Animation_animation_started"]
+[connection signal="timeout" from="Stats/InvencibilityTimer" to="Stats" method="on_invencibility_timer_timeout"]
+[connection signal="area_entered" from="CollisionArea" to="Stats" method="on_collision_area_entered"]
