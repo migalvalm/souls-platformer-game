@@ -9,6 +9,7 @@ var can_die: bool = false
 var can_hit: bool = false
 var can_attack: bool = false
 
+var drop_bonus: int = 1
 var velocity: Vector2
 var drop_list: Dictionary
 var player_ref: Player = null
@@ -60,3 +61,52 @@ func verify_position() -> void:
 
 func kill_enemy() -> void:
 	animation.play("kill")
+	spawn_item_probability()
+
+func spawn_item_probability() -> void:
+	var random_number: int = randi() % 21
+	
+	if random_number <= 6:
+		drop_bonus = 1
+	elif random_number >= 7 and random_number <= 13:
+		drop_bonus = 2
+	else:
+		drop_bonus = 3
+	
+	print("Mutiplicador de Drop: " + str(drop_bonus))
+	
+	for key in drop_list.keys():
+		var rng: int = randi() % 100 + 1
+		if rng <= drop_list[key][1] * drop_bonus:
+			var item_texture: StreamTexture = load(drop_list[key][0])
+			
+			# Path, Item Type, Item Value, Item Coin Value, Amount
+			var item_info: Array = [
+				drop_list[key][0], 
+				drop_list[key][2], 
+				drop_list[key][3], 
+				drop_list[key][4],
+				1
+			]
+			
+			spawn_physic_item(key, item_texture, item_info)
+
+func spawn_physic_item(
+		key: String, 
+		item_texture: StreamTexture, 
+		item_info: Array
+	) -> void:
+		
+		var physic_item_scene = load("res://scenes/env/physic_item.tscn")
+		var item: PhysicItem = physic_item_scene.instance()
+		
+		get_tree().root.call_deferred("add_child", item)
+		
+		item.global_position = global_position
+		item.update_item_info(
+			key,
+			item_texture,
+			item_info
+		)
+		
+		

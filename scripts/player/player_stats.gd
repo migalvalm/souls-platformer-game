@@ -13,7 +13,7 @@ onready var invencibility_timer: Timer = get_node("InvencibilityTimer")
 
 var base_health: int = 15
 var base_mana: int = 10
-var base_attack: int = 1
+var base_attack: int = 10
 var base_magic_attack: int =3
 var base_defense: int = 1
 
