@@ -51,7 +51,7 @@ func vertical_behavior(direction: Vector2) -> void:
 
 func horizontal_behavior(direction: Vector2) -> void:
 	if direction.x != 0:
-		animation.play("run")
+		animation.play("run" + suffix)
 	else:
 		animation.play("idle")
 
@@ -81,23 +81,24 @@ func _on_animation_finished(anim_name: String):
 		"landing":
 			player.landing = false
 			player.set_physics_process(true)
-			
+
 		"attack_left":
 			normal_attack = false
 			player.attacking = false
-		
+
 		"attack_right":
 			normal_attack = false
 			player.attacking = false
-			
+
 		"hit":
 			player.on_hit = false
 			player.set_physics_process(true)
-			
+
 			if player.defending:
 				animation.play("shield")
 				
 			if player.crouching:
 				animation.play("crouch")
+
 		"death":
 			emit_signal("game_over")

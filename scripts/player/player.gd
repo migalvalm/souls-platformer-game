@@ -5,7 +5,7 @@ onready var player_sprite: Sprite = get_node("Texture")
 onready var wall_ray: RayCast2D = get_node("WallRay")
 onready var stats: Node = get_node("Stats")
 
-var direction: int = 1
+var direction: int = -1
 var velocity: Vector2
 var jump_count: int = 0
 
@@ -18,6 +18,7 @@ var attacking: bool = false
 var defending: bool = false
 var crouching: bool = false
 
+var flipped: bool = false
 var not_on_wall: bool = true
 var can_track_input: bool = true
 
@@ -59,6 +60,8 @@ func vertical_movement_env() -> void:
 
 	if Input.is_action_just_pressed("jump") and jump_count < 2 and can_move():
 		jump_count += 1
+
+		spawn_effect("res://scenes/effect/dust/jump.tscn", Vector2(0,18), is_flipped())
 		if next_to_wall() and not is_on_floor():
 			velocity.y = wall_jump_speed
 			velocity.x += wall_impulse_speed * direction
@@ -120,5 +123,23 @@ func next_to_wall() -> bool:
 		
 	return !not_on_wall
 
+func spawn_effect(effect_path: String, offset: Vector2, is_flipped: bool) -> void:
+	var effect_instance: EffectTemplate = load(effect_path).instance()
+	
+	get_tree().root.call_deferred("add_child", effect_instance)
+	
+	if is_flipped:
+		effect_instance.flip_h = true
+	
+	effect_instance.global_position = global_position + offset
+	effect_instance.play_effect()
+
 func is_damaged() -> bool:
 	return on_hit or dead
+
+# If player is right returns false, if left returns true
+func is_flipped() -> bool:
+	if direction < 0: return false
+	
+	return true
+
