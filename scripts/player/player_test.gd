@@ -1,5 +1,5 @@
 extends KinematicBody2D
-class_name Player
+class_name PlayerTest
 
 const SPELL: PackedScene = preload("res://scenes/player/spell_area.tscn")
 onready var player_sprite: Sprite = get_node("Texture")
@@ -77,7 +77,7 @@ func actions_env() -> void:
 	defense()
 
 func attack() -> void:
-	var attack_condition: bool = not attacking and not crouching and not defending and is_on_floor()
+	var attack_condition: bool = not attacking and not crouching and not defending and is_on_floor() 
 	
 	if Input.is_action_just_pressed("attack") and attack_condition:
 		attacking = true

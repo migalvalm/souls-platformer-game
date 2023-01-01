@@ -1,13 +1,14 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://assets/player/char_red.png" type="Texture" id=1]
 [ext_resource path="res://scripts/player/player.gd" type="Script" id=2]
 [ext_resource path="res://scripts/player/player_texture.gd" type="Script" id=3]
 [ext_resource path="res://assets/effect/light.png" type="Texture" id=4]
 [ext_resource path="res://scripts/player/player_stats.gd" type="Script" id=5]
+[ext_resource path="res://scenes/env/floating_text.tscn" type="PackedScene" id=6]
 
 [sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 6, 15 )
+extents = Vector2( 8.75, 17 )
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -293,7 +294,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=2]
 resource_name = "idle"
-length = 0.7
+length = 0.6
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Texture:frame")
@@ -302,10 +303,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 1, 2, 3, 4, 5 ]
+"values": [ 0, 1, 2, 3, 4 ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -437,6 +438,36 @@ tracks/0/keys = {
 "values": [ 80, 81, 82 ]
 }
 
+[sub_resource type="Animation" id=19]
+resource_name = "spell_attack"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath("Texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 64, 65, 66, 67, 68, 69, 70 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "spawn_spell"
+} ]
+}
+
 [sub_resource type="Animation" id=13]
 resource_name = "wall_slid"
 length = 0.2
@@ -520,6 +551,7 @@ wall_jump_speed = -150
 wall_gravity = 150
 player_gravity = 350
 wall_impulse_speed = 500
+magic_attack_cost = 5
 
 [node name="Texture" type="Sprite" parent="."]
 texture = ExtResource( 1 )
@@ -531,7 +563,8 @@ player = NodePath("..")
 attack_collision = NodePath("../AttackArea/Collision")
 
 [node name="Collision" type="CollisionShape2D" parent="."]
-position = Vector2( -1, 12.5 )
+visible = false
+position = Vector2( -1.75, 11 )
 shape = SubResource( 7 )
 
 [node name="Animation" type="AnimationPlayer" parent="."]
@@ -548,6 +581,7 @@ anims/landing = SubResource( 6 )
 anims/run_left = SubResource( 18 )
 anims/run_right = SubResource( 3 )
 anims/shield = SubResource( 12 )
+anims/spell_attack = SubResource( 19 )
 anims/wall_slid = SubResource( 13 )
 
 [node name="LevelCamera" type="Camera2D" parent="."]
@@ -580,8 +614,9 @@ autoplay = "light_animation"
 anims/RESET = SubResource( 14 )
 anims/light_animation = SubResource( 15 )
 
-[node name="Stats" type="Node" parent="."]
+[node name="Stats" type="Node" parent="." groups=["player_stats"]]
 script = ExtResource( 5 )
+floating_text = ExtResource( 6 )
 player = NodePath("..")
 collision_area = NodePath("../CollisionArea")
 
@@ -589,6 +624,7 @@ collision_area = NodePath("../CollisionArea")
 one_shot = true
 
 [node name="CollisionArea" type="Area2D" parent="."]
+visible = false
 collision_layer = 4
 collision_mask = 0
 

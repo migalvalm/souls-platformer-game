@@ -1,6 +1,8 @@
 extends KinematicBody2D
 class_name EnemyTemplate
 
+signal kill
+
 onready var texture: Sprite = get_node("Texture")
 onready var floor_ray: RayCast2D = get_node("FloorRay")
 onready var animation: AnimationPlayer = get_node("Animation")
@@ -10,11 +12,14 @@ var can_hit: bool = false
 var can_attack: bool = false
 
 var drop_bonus: int = 1
+var attack_animation_suffix: String = "left"
 var velocity: Vector2
 var drop_list: Dictionary
 var player_ref: Player = null
 
+export (PackedScene) var floating_text
 export(int) var speed
+export(int) var enemy_exp
 export(int) var gravity_speed
 export(int) var proximity_threshold
 export(int) var raycast_default_position
@@ -54,14 +59,20 @@ func verify_position() -> void:
 
 		if direction > 0:
 			texture.flip_h = true
+			attack_animation_suffix = "_right"
 			floor_ray.position.x = abs(raycast_default_position)
 		elif direction < 0:
 			texture.flip_h = false
+			attack_animation_suffix = "_left"
 			floor_ray.position.x = raycast_default_position
 
 func kill_enemy() -> void:
+	emit_signal("kill")
 	animation.play("kill")
+	get_tree().call_group("player_stats", "update_exp", enemy_exp)
+	
 	spawn_item_probability()
+	
 
 func spawn_item_probability() -> void:
 	var random_number: int = randi() % 21
@@ -72,8 +83,6 @@ func spawn_item_probability() -> void:
 		drop_bonus = 2
 	else:
 		drop_bonus = 3
-	
-	print("Mutiplicador de Drop: " + str(drop_bonus))
 	
 	for key in drop_list.keys():
 		var rng: int = randi() % 100 + 1
@@ -108,5 +117,15 @@ func spawn_physic_item(
 			item_texture,
 			item_info
 		)
-		
-		
+
+func spawn_floating_text(type_sign: String, type: String, value: int):
+	var text: FloatText = floating_text.instance()
+	
+	text.rect_global_position = global_position
+	
+	text.type = type
+	text.value = value
+	text.type_sign = type_sign
+	
+	get_tree().root.call_deferred("add_child", text)
+

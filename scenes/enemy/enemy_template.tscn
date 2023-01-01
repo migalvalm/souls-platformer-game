@@ -1,14 +1,16 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scripts/enemy/detection_area.gd" type="Script" id=1]
 [ext_resource path="res://scripts/enemy/enemy_template.gd" type="Script" id=2]
 [ext_resource path="res://scripts/enemy/enemy_texture.gd" type="Script" id=3]
 [ext_resource path="res://scripts/enemy/collision_area.gd" type="Script" id=4]
 [ext_resource path="res://scripts/enemy/attack_area.gd" type="Script" id=5]
+[ext_resource path="res://scenes/env/floating_text.tscn" type="PackedScene" id=6]
 
 [node name="EnemyTemplate" type="KinematicBody2D"]
 collision_layer = 8
 script = ExtResource( 2 )
+floating_text = ExtResource( 6 )
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 
@@ -49,4 +51,5 @@ script = ExtResource( 5 )
 [connection signal="body_entered" from="DetectionArea" to="DetectionArea" method="on_body_entered"]
 [connection signal="body_exited" from="DetectionArea" to="DetectionArea" method="on_body_exited"]
 [connection signal="area_entered" from="CollisionArea" to="CollisionArea" method="on_collision_area_entered"]
+[connection signal="timeout" from="CollisionArea/Timer" to="CollisionArea" method="on_timer_timeout"]
 [connection signal="animation_finished" from="Animation" to="Texture" method="on_animation_finished"]

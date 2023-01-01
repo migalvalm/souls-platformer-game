@@ -5,6 +5,7 @@ signal game_over
 
 var suffix: String = "_right"
 var normal_attack: bool = false
+var magic_attack: bool = false
 var shield_off: bool = false
 var crouching_off: bool = false
 
@@ -32,6 +33,7 @@ func verify_position(direction: Vector2) -> void:
 		flip_h = false
 		suffix = "_right"
 		player.direction = -1
+		player.spell_offset = Vector2(100, -50)
 		position = Vector2.ZERO
 		player.wall_ray.cast_to = Vector2(5.5, 0)
 	
@@ -40,6 +42,7 @@ func verify_position(direction: Vector2) -> void:
 		suffix = "_left"
 		player.direction = 1
 		position = Vector2(-2, 0)
+		player.spell_offset = Vector2(-100, -50)
 		player.wall_ray.cast_to = Vector2(-7.5, 0)
 	
 func vertical_behavior(direction: Vector2) -> void:
@@ -58,8 +61,11 @@ func horizontal_behavior(direction: Vector2) -> void:
 func action_behavior() -> void:
 	if player.next_to_wall():
 		animation.play("wall_slid")
-	elif player.attacking and normal_attack:
-		animation.play("attack" + suffix)
+	elif player.attacking:
+		if normal_attack:
+			animation.play("attack" + suffix)
+		if magic_attack:
+			animation.play("spell_attack")
 	elif player.defending and shield_off:
 		animation.play("shield")
 		shield_off = false
@@ -88,6 +94,10 @@ func _on_animation_finished(anim_name: String):
 
 		"attack_right":
 			normal_attack = false
+			player.attacking = false
+
+		"spell_attack":
+			magic_attack = false
 			player.attacking = false
 
 		"hit":

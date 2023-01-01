@@ -6,8 +6,11 @@ class_name PlayerStats
 # Reference: https://www.reddit.com/r/godot/comments/5c3qq5/comment/d9tf3w5/?utm_source=reddit&utm_medium=web2x&context=3
 #####
 
+export(PackedScene) var floating_text
+
 export(NodePath) onready var player = get_node(player) as KinematicBody2D
 export(NodePath) onready var collision_area = get_node(collision_area) as Area2D
+
 
 onready var invencibility_timer: Timer = get_node("InvencibilityTimer")
 
@@ -52,9 +55,14 @@ func _ready() -> void:
 	current_health = base_health + bonus_health
 	max_health = current_health
 	
-# Level State Management
+	initiate_bars()
+	
+### Level State Management
 func update_exp(value: int) -> void:
 	current_exp += value
+	spawn_floating_text("+", "Exp", value)
+	get_tree().call_group("bar_container", "update_bar", "ExpBar", current_exp)
+	
 	if current_exp >=  get_current_level_max_xp() and level < 9:
 		var leftover: int = current_exp - get_current_level_max_xp()
 		current_exp = leftover
@@ -66,15 +74,26 @@ func update_exp(value: int) -> void:
 func on_level_up() -> void:
 	current_mana = base_mana + bonus_mana
 	current_health = base_health + bonus_health
+	
+	get_tree().call_group("bar_container", "update_bar", "ManaBar", current_mana)
+	get_tree().call_group("bar_container", "update_bar", "HealthBar", current_health)
+	
+	yield(
+		get_tree().create_timer(0.4),
+		"timeout"
+	)
+	
+	get_tree().call_group("bar_container", "reset_exp_bar", get_current_level_max_xp(), current_exp)
 
 func get_current_level_max_xp() -> int:
 	return level_dict[str(level)]
 
-# Health State Management
+### Health State Management
 func update_health(type: String, value: int) -> void:
 	match type:
 		"Increase":
 			current_health += value
+			spawn_floating_text("+", "Health", value)
 			if current_health >= max_health:
 				current_health = max_health
 		"Decrease":
@@ -84,6 +103,8 @@ func update_health(type: String, value: int) -> void:
 			else:
 				player.on_hit = true
 				player.attacking = false
+	
+	get_tree().call_group("bar_container", "update_bar", "HealthBar", current_health)
 
 func verify_shield(value: int) -> void:
 	if player.defending: 
@@ -92,25 +113,52 @@ func verify_shield(value: int) -> void:
 		
 		var damage = abs((base_defense + bonus_defense) - value)
 		current_health -= damage
-		
+		spawn_floating_text("-", "Damage", damage)
+	
 	else:
 		current_health -= value
+		spawn_floating_text("-", "Damage", value)
 
-# Mana State Management
+### Mana State Management
 func update_mana(type: String, value: int) -> void:
 	match type:
 		"Increase":
 			current_mana += value
+			spawn_floating_text("+", "Mana", value)
 			if current_mana >= max_mana:
-				current_health = max_mana
+				current_mana = max_mana
+			
 		"Decrease":
 			current_mana -= value
+			spawn_floating_text("-", "Mana", value)
+			
+	get_tree().call_group("bar_container", "update_bar", "ManaBar", current_mana)
 
-# Helpers
+### Helpers
 func player_attack() -> int:
 	return base_attack + bonus_attack
 
-# Signals
+func initiate_bars() -> void:
+	get_tree().call_group(
+		"bar_container", 
+		"init_bar", 
+		max_health, 
+		max_mana, 
+		get_current_level_max_xp()
+	)
+
+func spawn_floating_text(type_sign: String, type: String, value: int):
+	var text: FloatText = floating_text.instance()
+	
+	text.rect_global_position = player.global_position
+	
+	text.type = type
+	text.value = value
+	text.type_sign = type_sign
+	
+	get_tree().root.call_deferred("add_child", text)
+
+### Signals
 func on_collision_area_entered(area):
 	if area.name == "EnemyAttackArea":
 		update_health("Decrease", area.damage)
