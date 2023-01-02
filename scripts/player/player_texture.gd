@@ -35,15 +35,17 @@ func verify_position(direction: Vector2) -> void:
 		player.direction = -1
 		player.spell_offset = Vector2(100, -50)
 		position = Vector2.ZERO
-		player.wall_ray.cast_to = Vector2(5.5, 0)
+		player.get_node("Collision").position = Vector2(-2,11)
+		player.wall_ray.cast_to = Vector2(9, 0)
 	
 	elif direction.x < 0:
 		flip_h = true
 		suffix = "_left"
 		player.direction = 1
 		position = Vector2(-2, 0)
+		player.get_node("Collision").position = Vector2(2,11)
 		player.spell_offset = Vector2(-100, -50)
-		player.wall_ray.cast_to = Vector2(-7.5, 0)
+		player.wall_ray.cast_to = Vector2(-9.5, 0)
 	
 func vertical_behavior(direction: Vector2) -> void:
 	if direction.y > 0:

@@ -563,7 +563,6 @@ player = NodePath("..")
 attack_collision = NodePath("../AttackArea/Collision")
 
 [node name="Collision" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( -1.75, 11 )
 shape = SubResource( 7 )
 
@@ -592,6 +591,7 @@ drag_margin_h_enabled = true
 drag_margin_v_enabled = true
 
 [node name="AttackArea" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 8
 
@@ -600,7 +600,7 @@ shape = SubResource( 8 )
 
 [node name="WallRay" type="RayCast2D" parent="."]
 enabled = true
-cast_to = Vector2( 5.2, 0 )
+cast_to = Vector2( 9, 0 )
 collision_mask = 3
 
 [node name="Light2D" type="Light2D" parent="."]
