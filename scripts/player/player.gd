@@ -19,6 +19,7 @@ var on_wall: bool = false
 var attacking: bool = false
 var defending: bool = false
 var crouching: bool = false
+var rolling: bool = false
 var standing_up: bool = false
 
 var flipped: bool = false
@@ -27,6 +28,7 @@ var can_track_input: bool = true
 
 export(int) var speed
 export(int) var jump_speed
+export(int) var roll_speed
 export(int) var wall_jump_speed
 
 export(int) var wall_gravity
@@ -43,17 +45,15 @@ func _ready():
 func _physics_process(delta: float):
 	horizontal_movement_env()
 	vertical_movement_env()
-	actions_env()
+	actions_env(delta)
 	
 	gravity(delta)
 	velocity = move_and_slide(velocity, Vector2.UP)
 	player_sprite.animate(velocity)
 
 func horizontal_movement_env() -> void:
-	var input_direction: float = Input.get_action_strength("right") - Input.get_action_strength("left")
-	
 	if can_move():
-		velocity.x = input_direction * speed
+		velocity.x = get_input_direction() * speed
 		return
 		
 	velocity.x = 0
@@ -72,10 +72,11 @@ func vertical_movement_env() -> void:
 		else:
 			velocity.y = jump_speed
 
-func actions_env() -> void:
+func actions_env(delta: float) -> void:
+	roll(delta)
 	attack()
 	crouch()
-	defense()
+	#defense()
 
 func attack() -> void:
 	var attack_condition: bool = not attacking and not crouching and not defending and is_on_floor()
@@ -93,10 +94,10 @@ func attack() -> void:
 		attacking = true
 		player_sprite.crouch_attack = true
 	
-	elif Input.is_action_just_pressed("magic_attack") and attack_condition and stats.current_mana >= magic_attack_cost:
-		attacking = true
-		player_sprite.magic_attack = true
-		stats.update_mana("Decrease", magic_attack_cost)
+#	elif Input.is_action_just_pressed("magic_attack") and attack_condition and stats.current_mana >= magic_attack_cost:
+	#   attacking = true
+	#   player_sprite.magic_attack = true
+	#   stats.update_mana("Decrease", magic_attack_cost)
 	
 
 func crouch() -> void:
@@ -124,6 +125,25 @@ func defense() -> void:
 		can_track_input = true
 		player_sprite.shield_off = true
 
+func roll(delta: float) -> void:
+	var roll_effect:bool = true
+	if Input.is_action_just_pressed("roll"):
+		rolling = true
+		can_track_input = false
+		
+		print("get ", get_input_direction())
+		print("d ", direction)
+		
+
+		if get_input_direction() != 0:
+			velocity.x = get_input_direction() * roll_speed * delta
+		else:
+			velocity.x = roll_speed * direction * delta
+		
+		if roll_effect:
+			spawn_effect("res://scenes/effect/dust/run.tscn", Vector2(0,22), is_flipped())
+			roll_effect = false
+			
 func can_move() -> bool:
 	return can_track_input and not attacking
 
@@ -168,9 +188,12 @@ func spawn_spell() -> void:
 func is_damaged() -> bool:
 	return on_hit or dead
 
-# If player is right returns false, if left returns true
+# If player is right returns true, if left returns true
 func is_flipped() -> bool:
-	if direction < 0: return false
+	if direction > 0: return false
 	
 	return true
+
+func get_input_direction() -> float:
+	return Input.get_action_strength("right") - Input.get_action_strength("left")
 

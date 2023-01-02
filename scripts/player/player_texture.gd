@@ -20,13 +20,12 @@ func animate(direction: Vector2) -> void:
 	
 	if player.is_damaged():
 		hit_behavior()
-	elif player.attacking or player.defending or player.crouching or player.next_to_wall():
+	elif player.rolling or player.attacking or player.defending or player.crouching or player.next_to_wall():
 		action_behavior()
 	elif direction.y != 0: 
 		vertical_behavior(direction)
 	elif player.landing == true: 
 		animation.play("landing")
-		player.set_physics_process(false)
 	else: 
 		horizontal_behavior(direction)
 
@@ -34,7 +33,7 @@ func verify_position(direction: Vector2) -> void:
 	if direction.x > 0:
 		flip_h = false
 		suffix = "_right"
-		player.direction = -1
+		player.direction = 1
 		player.get_node("Collision").position = Vector2(-6.25, 21.25)
 		player.spell_offset = Vector2(100, -50)
 		position = Vector2.ZERO
@@ -43,7 +42,7 @@ func verify_position(direction: Vector2) -> void:
 	elif direction.x < 0:
 		flip_h = true
 		suffix = "_left"
-		player.direction = 1
+		player.direction = -1
 		player.get_node("Collision").position = Vector2(5,21.25)
 		position = Vector2(-2, 0)
 		player.spell_offset = Vector2(-100, -50)
@@ -63,8 +62,9 @@ func horizontal_behavior(direction: Vector2) -> void:
 		animation.play("idle")
 
 func action_behavior() -> void:
-	print(player.next_to_wall())
-	if player.next_to_wall():
+	if player.rolling:
+		animation.play("roll")
+	elif player.next_to_wall():
 		animation.play("wall_slid")
 	elif player.attacking:
 		if normal_attack:
@@ -101,7 +101,6 @@ func _on_animation_finished(anim_name: String):
 	match anim_name:
 		"landing":
 			player.landing = false
-			player.set_physics_process(true)
 
 		"attack_left":
 			normal_attack = false
@@ -143,5 +142,11 @@ func _on_animation_finished(anim_name: String):
 			if player.crouching:
 				animation.play("crouch")
 			
+			if player.rolling:
+				player.rolling = false
+		
+		"roll":
+			player.rolling = false
+			player.can_track_input = true
 		"death":
 			emit_signal("game_over")

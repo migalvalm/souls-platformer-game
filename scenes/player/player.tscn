@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://v2_assets/player/_Idle.png" type="Texture" id=1]
 [ext_resource path="res://scripts/player/player.gd" type="Script" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://v2_assets/player/_CrouchFull.png" type="Texture" id=14]
 [ext_resource path="res://v2_assets/player/_Attack2NoMovement.png" type="Texture" id=15]
 [ext_resource path="res://v2_assets/player/_CrouchAttack.png" type="Texture" id=16]
+[ext_resource path="res://v2_assets/player/_Roll.png" type="Texture" id=17]
 
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 12.5, 23.4375 )
@@ -165,6 +166,30 @@ tracks/11/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector2( -6.25, 21.25 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("CollisionArea:monitoring")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("Animation:playback_speed")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
 }
 
 [sub_resource type="Animation" id=24]
@@ -896,6 +921,70 @@ tracks/0/keys = {
 } ]
 }
 
+[sub_resource type="Animation" id=27]
+resource_name = "roll"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Texture:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 17 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Texture:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 12 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Texture:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("CollisionArea:monitoring")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Animation:playback_speed")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.5, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 2,
+"values": [ 1.5, 3.0, 0.9, 1.0 ]
+}
+
 [sub_resource type="Animation" id=18]
 resource_name = "run_left"
 tracks/0/type = "method"
@@ -1152,6 +1241,7 @@ collision_mask = 3
 script = ExtResource( 2 )
 speed = 100
 jump_speed = -175
+roll_speed = 300
 wall_jump_speed = -150
 wall_gravity = 150
 player_gravity = 400
@@ -1186,6 +1276,7 @@ anims/hit = SubResource( 17 )
 anims/idle = SubResource( 2 )
 anims/jump = SubResource( 5 )
 anims/landing = SubResource( 6 )
+anims/roll = SubResource( 27 )
 anims/run_left = SubResource( 18 )
 anims/run_right = SubResource( 20 )
 anims/standing_up = SubResource( 22 )
