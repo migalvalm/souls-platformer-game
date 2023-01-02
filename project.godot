@@ -104,11 +104,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/player/player_stats.gd"
 }, {
-"base": "KinematicBody2D",
-"class": "PlayerTest",
-"language": "GDScript",
-"path": "res://scripts/player/player_test.gd"
-}, {
 "base": "Sprite",
 "class": "PlayerTexture",
 "language": "GDScript",
@@ -144,7 +139,6 @@ _global_script_class_icons={
 "PinkStarTexture": "",
 "Player": "",
 "PlayerStats": "",
-"PlayerTest": "",
 "PlayerTexture": "",
 "Whale": "",
 "WhaleTexture": ""
