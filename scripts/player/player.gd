@@ -19,6 +19,7 @@ var on_wall: bool = false
 var attacking: bool = false
 var defending: bool = false
 var crouching: bool = false
+var standing_up: bool = false
 
 var flipped: bool = false
 var not_on_wall: bool = true
@@ -64,7 +65,7 @@ func vertical_movement_env() -> void:
 	if Input.is_action_just_pressed("jump") and jump_count < 2 and can_move():
 		jump_count += 1
 
-		spawn_effect("res://scenes/effect/dust/jump.tscn", Vector2(0,18), is_flipped())
+		spawn_effect("res://scenes/effect/dust/jump.tscn", Vector2(0,22), is_flipped())
 		if next_to_wall() and not is_on_floor():
 			velocity.y = wall_jump_speed
 			velocity.x += wall_impulse_speed * direction
@@ -78,15 +79,25 @@ func actions_env() -> void:
 
 func attack() -> void:
 	var attack_condition: bool = not attacking and not crouching and not defending and is_on_floor()
+	var combo_condition: bool = attacking and not crouching and not defending and is_on_floor()
+	var crouch_attack_condition: bool = not attacking and crouching and not defending and is_on_floor()
 	
 	if Input.is_action_just_pressed("attack") and attack_condition:
 		attacking = true
 		player_sprite.normal_attack = true
+	
+	elif Input.is_action_just_pressed("attack") and combo_condition:
+		player_sprite.normal_attack_2 = true
+		
+	elif Input.is_action_just_pressed("attack") and crouch_attack_condition:
+		attacking = true
+		player_sprite.crouch_attack = true
+	
 	elif Input.is_action_just_pressed("magic_attack") and attack_condition and stats.current_mana >= magic_attack_cost:
 		attacking = true
 		player_sprite.magic_attack = true
 		stats.update_mana("Decrease", magic_attack_cost)
-		
+	
 
 func crouch() -> void:
 	if Input.is_action_pressed("crouch") and is_on_floor() and not defending:
@@ -97,6 +108,11 @@ func crouch() -> void:
 		crouching = false
 		can_track_input = true
 		player_sprite.crouching_off = true
+	
+	if Input.is_action_just_released("crouch") and crouching:
+		crouching = false
+		standing_up = true
+		can_track_input = true
 
 func defense() -> void:
 	if Input.is_action_pressed("defense") and is_on_floor() and not crouching:

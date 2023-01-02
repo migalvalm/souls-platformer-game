@@ -46,6 +46,9 @@ collision_mask = 0
 format = 1
 tile_data = PoolIntArray( 196644, 1, 0, 196645, 2, 0, 393212, 2, 0, 393213, 1, 0, 327680, 1, 0, 327682, 0, 0, 327683, 2, 0, 327684, 2, 0, 327685, 2, 0, 458773, 1, 0, 458776, 2, 0, 458777, 0, 0, 458780, 1, 0, 589834, 2, 0, 589835, 1, 0, 589836, 0, 0, 589837, 2, 0, 589838, 2, 0, 589839, 2, 0, 983072, 0, 0, 1245198, 0, 0, 1245199, 1, 0, 1245200, 2, 0, 1245205, 2, 0 )
 
+[node name="Player" parent="." instance=ExtResource( 6 )]
+position = Vector2( 305, 116 )
+
 [node name="Mask" parent="." instance=ExtResource( 5 )]
 
 [node name="Background" parent="." instance=ExtResource( 1 )]
@@ -66,6 +69,3 @@ right_gap_position = 67
 can_respawn = true
 
 [node name="Hud" parent="." instance=ExtResource( 9 )]
-
-[node name="Player" parent="." instance=ExtResource( 6 )]
-position = Vector2( 305, 116 )
