@@ -11,12 +11,11 @@ export(PackedScene) var floating_text
 export(NodePath) onready var player = get_node(player) as KinematicBody2D
 export(NodePath) onready var collision_area = get_node(collision_area) as Area2D
 
-
 onready var invencibility_timer: Timer = get_node("InvencibilityTimer")
 
 var base_health: int = 15
 var base_mana: int = 10
-var base_attack: int = 10
+var base_attack: int = 3
 var base_magic_attack: int =3
 var base_defense: int = 1
 

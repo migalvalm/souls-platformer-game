@@ -5,6 +5,8 @@ signal game_over
 
 var suffix: String = "_right"
 var normal_attack: bool = false
+var normal_attack_2: bool = false
+var crouch_attack: bool = false
 var magic_attack: bool = false
 var shield_off: bool = false
 var crouching_off: bool = false
@@ -18,13 +20,12 @@ func animate(direction: Vector2) -> void:
 	
 	if player.is_damaged():
 		hit_behavior()
-	elif player.attacking or player.defending or player.crouching or player.next_to_wall():
+	elif player.dashing or player.rolling or player.attacking or player.defending or player.crouching or player.next_to_wall():
 		action_behavior()
 	elif direction.y != 0: 
 		vertical_behavior(direction)
 	elif player.landing == true: 
 		animation.play("landing")
-		player.set_physics_process(false)
 	else: 
 		horizontal_behavior(direction)
 
@@ -32,20 +33,22 @@ func verify_position(direction: Vector2) -> void:
 	if direction.x > 0:
 		flip_h = false
 		suffix = "_right"
-		player.direction = -1
+		player.direction = 1
+		player.get_node("Collision").position = Vector2(-6.25, 21.25)
+		player.get_node("CollisionArea").get_node("Collision").position = Vector2(-6.25, 21.25)
 		player.spell_offset = Vector2(100, -50)
 		position = Vector2.ZERO
-		player.get_node("Collision").position = Vector2(-2,11)
-		player.wall_ray.cast_to = Vector2(9, 0)
+		player.wall_ray.cast_to = Vector2(6, 0)
 	
 	elif direction.x < 0:
 		flip_h = true
 		suffix = "_left"
-		player.direction = 1
+		player.direction = -1
+		player.get_node("Collision").position = Vector2(5,21.25)
+		player.get_node("CollisionArea").get_node("Collision").position = Vector2(5,21.25)
 		position = Vector2(-2, 0)
-		player.get_node("Collision").position = Vector2(2,11)
 		player.spell_offset = Vector2(-100, -50)
-		player.wall_ray.cast_to = Vector2(-9.5, 0)
+		player.wall_ray.cast_to = Vector2(-6, 0)
 	
 func vertical_behavior(direction: Vector2) -> void:
 	if direction.y > 0:
@@ -61,19 +64,27 @@ func horizontal_behavior(direction: Vector2) -> void:
 		animation.play("idle")
 
 func action_behavior() -> void:
-	if player.next_to_wall():
+	if player.rolling:
+		animation.play("roll")
+	elif player.dashing:
+		animation.play("dash")
+	elif player.next_to_wall():
 		animation.play("wall_slid")
 	elif player.attacking:
 		if normal_attack:
 			animation.play("attack" + suffix)
 		if magic_attack:
 			animation.play("spell_attack")
+		if crouch_attack:
+			animation.play("crouch_attack")
 	elif player.defending and shield_off:
 		animation.play("shield")
 		shield_off = false
 	elif player.crouching and crouching_off:
 		animation.play("crouch")
 		crouching_off = false
+	elif player.standing_up:
+		animation.play("standing_up")
 
 func hit_behavior() -> void:
 	player.set_physics_process(false)
@@ -84,24 +95,47 @@ func hit_behavior() -> void:
 	elif player.on_hit:
 		animation.play("hit")
 
+func can_combo():
+	if normal_attack_2: 
+		animation.play("attack_2" + suffix)
+	else:
+		player.attacking = false
+
 func _on_animation_finished(anim_name: String):
 	match anim_name:
 		"landing":
 			player.landing = false
-			player.set_physics_process(true)
 
 		"attack_left":
 			normal_attack = false
+			
+			can_combo()
+
+		"attack_2_left":
+			normal_attack_2 = false
 			player.attacking = false
 
 		"attack_right":
 			normal_attack = false
+			
+			can_combo()
+
+		"attack_2_right":
+			normal_attack_2 = false
 			player.attacking = false
 
 		"spell_attack":
 			magic_attack = false
 			player.attacking = false
-
+			
+		"crouch_attack":
+			crouch_attack = false
+			player.attacking = false
+			animation.play("full_crouch")
+			
+		"standing_up":
+			player.standing_up = false
+			
 		"hit":
 			player.on_hit = false
 			player.set_physics_process(true)
@@ -109,6 +143,16 @@ func _on_animation_finished(anim_name: String):
 			if player.defending:
 				animation.play("shield")
 				
+			if player.crouching:
+				animation.play("crouch")
+			
+			if player.rolling:
+				player.rolling = false
+
+		"roll":
+			player.rolling = false
+		
+		"dash":
 			if player.crouching:
 				animation.play("crouch")
 

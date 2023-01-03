@@ -1,0 +1,57 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scripts/env/background.gd" type="Script" id=1]
+[ext_resource path="res://scenes/env/mask.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/tile/parallax_background/layer_2.png" type="Texture" id=3]
+[ext_resource path="res://assets/tile/parallax_background/layer_1.png" type="Texture" id=4]
+[ext_resource path="res://assets/tile/parallax_background/layer_3.png" type="Texture" id=5]
+[ext_resource path="res://assets/tile/parallax_background/layer_4.png" type="Texture" id=6]
+
+[sub_resource type="TileSet" id=1]
+
+[node name="level_cemetery" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource( 1 )
+format = 1
+
+[node name="Background" type="ParallaxBackground" parent="TileMap"]
+script = ExtResource( 1 )
+layer_speed = [ 20, 15, 10, 5 ]
+
+[node name="Layer4" type="ParallaxLayer" parent="TileMap/Background"]
+motion_mirroring = Vector2( 320, 180 )
+
+[node name="Texture" type="TextureRect" parent="TileMap/Background/Layer4"]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 6 )
+
+[node name="Layer1" type="ParallaxLayer" parent="TileMap/Background"]
+motion_scale = Vector2( 0.4, 1 )
+motion_mirroring = Vector2( 320, 0 )
+
+[node name="Texture" type="TextureRect" parent="TileMap/Background/Layer1"]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 4 )
+
+[node name="Layer2" type="ParallaxLayer" parent="TileMap/Background"]
+motion_scale = Vector2( 0.6, 1 )
+motion_mirroring = Vector2( 320, 0 )
+
+[node name="Texture" type="TextureRect" parent="TileMap/Background/Layer2"]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 3 )
+
+[node name="Layer3" type="ParallaxLayer" parent="TileMap/Background"]
+motion_scale = Vector2( 0.8, 1 )
+motion_mirroring = Vector2( 320, 0 )
+
+[node name="Texture" type="TextureRect" parent="TileMap/Background/Layer3"]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 5 )
+
+[node name="Mask" parent="TileMap/Background" instance=ExtResource( 2 )]

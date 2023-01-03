@@ -541,7 +541,6 @@ damage = 3
 invencibility_timer = 0.4
 
 [node name="Collision" parent="EnemyAttackArea" index="0"]
-position = Vector2( 1, 2 )
 shape = SubResource( 9 )
 disabled = true
 
