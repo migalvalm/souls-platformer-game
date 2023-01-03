@@ -24,6 +24,9 @@ export(int) var gravity_speed
 export(int) var proximity_threshold
 export(int) var raycast_default_position
 
+func _ready() -> void:
+	spawn_effect()
+
 func _physics_process(delta: float) -> void: 
 	gravity(delta)
 	move_behavior()
@@ -129,3 +132,14 @@ func spawn_floating_text(type_sign: String, type: String, value: int):
 	
 	get_tree().root.call_deferred("add_child", text)
 
+func spawn_effect() -> void:
+	var effect_instance: EffectTemplate = load("res://scenes/effect/general_effects/collect_item.tscn").instance()
+	
+	get_tree().root.call_deferred("add_child", effect_instance)
+	
+	effect_instance.global_position = global_position
+	effect_instance.play_effect()
+	yield(
+		get_tree().create_timer(0.5),
+		"timeout"
+	)

@@ -5,15 +5,18 @@ const SPELL: PackedScene = preload("res://scenes/player/spell_area.tscn")
 onready var player_sprite: Sprite = get_node("Texture")
 onready var wall_ray: RayCast2D = get_node("WallRay")
 onready var stats: Node = get_node("Stats")
+onready var player_dash = get_node("PlayerDash")
 
-var direction: int = -1
+var direction: int = 1
 var velocity: Vector2
 var spell_offset: Vector2 = Vector2(100, -50)
 var jump_count: int = 0
+var roll_count: int = 0
 
 #States
 var on_hit: bool = false
 var dead: bool = false
+var dashing: bool = false
 var landing: bool = false
 var on_wall: bool = false
 var attacking: bool = false
@@ -29,6 +32,8 @@ var can_track_input: bool = true
 export(int) var speed
 export(int) var jump_speed
 export(int) var roll_speed
+export(int) var dash_speed
+export(int) var dash_length
 export(int) var wall_jump_speed
 
 export(int) var wall_gravity
@@ -45,7 +50,7 @@ func _ready():
 func _physics_process(delta: float):
 	horizontal_movement_env()
 	vertical_movement_env()
-	actions_env(delta)
+	actions_env()
 	
 	gravity(delta)
 	velocity = move_and_slide(velocity, Vector2.UP)
@@ -72,8 +77,12 @@ func vertical_movement_env() -> void:
 		else:
 			velocity.y = jump_speed
 
-func actions_env(delta: float) -> void:
-	roll(delta)
+func actions_env() -> void:
+	if rolling:
+		roll()
+		return
+		
+	dash()
 	attack()
 	crouch()
 	#defense()
@@ -124,26 +133,22 @@ func defense() -> void:
 		defending = false
 		can_track_input = true
 		player_sprite.shield_off = true
+		
+func roll() -> void:
+	if get_input_direction() != 0:
+		velocity.x = get_input_direction() * roll_speed 
+	else:
+		velocity.x = roll_speed * direction
 
-func roll(delta: float) -> void:
-	var roll_effect:bool = true
-	if Input.is_action_just_pressed("roll"):
-		rolling = true
-		can_track_input = false
+func dash() -> void:
+	var dash_condition: bool = not dashing and not rolling and player_dash.dash_count > 0
+	if Input.is_action_pressed("roll") and dash_condition:
+		player_dash.start_dash(0.2)
+		dashing = true
 		
-		print("get ", get_input_direction())
-		print("d ", direction)
-		
+		player_dash.spawn_dash_effect(Vector2(0,10), is_flipped())
+		velocity.x = dash_speed * direction
 
-		if get_input_direction() != 0:
-			velocity.x = get_input_direction() * roll_speed * delta
-		else:
-			velocity.x = roll_speed * direction * delta
-		
-		if roll_effect:
-			spawn_effect("res://scenes/effect/dust/run.tscn", Vector2(0,22), is_flipped())
-			roll_effect = false
-			
 func can_move() -> bool:
 	return can_track_input and not attacking
 
@@ -195,5 +200,4 @@ func is_flipped() -> bool:
 	return true
 
 func get_input_direction() -> float:
-	return Input.get_action_strength("right") - Input.get_action_strength("left")
-
+	return  Input.get_axis("left", "right")

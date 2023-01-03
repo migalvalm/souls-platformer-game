@@ -3,7 +3,6 @@
 [ext_resource path="res://v2_assets/player/_Idle.png" type="Texture" id=1]
 [ext_resource path="res://scripts/player/player.gd" type="Script" id=2]
 [ext_resource path="res://scripts/player/player_texture.gd" type="Script" id=3]
-[ext_resource path="res://assets/effect/light.png" type="Texture" id=4]
 [ext_resource path="res://scripts/player/player_stats.gd" type="Script" id=5]
 [ext_resource path="res://scenes/env/floating_text.tscn" type="PackedScene" id=6]
 [ext_resource path="res://v2_assets/player/_Run.png" type="Texture" id=7]
@@ -17,6 +16,8 @@
 [ext_resource path="res://v2_assets/player/_Attack2NoMovement.png" type="Texture" id=15]
 [ext_resource path="res://v2_assets/player/_CrouchAttack.png" type="Texture" id=16]
 [ext_resource path="res://v2_assets/player/_Roll.png" type="Texture" id=17]
+[ext_resource path="res://v2_assets/player/_Dash.png" type="Texture" id=18]
+[ext_resource path="res://scenes/player/player_dash.tscn" type="PackedScene" id=19]
 
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 12.5, 23.4375 )
@@ -638,6 +639,58 @@ tracks/5/keys = {
 "values": [ true, false, false, true ]
 }
 
+[sub_resource type="Animation" id=28]
+resource_name = "dash"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Texture:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 2 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Texture:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 18 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("CollisionArea:monitoring")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+
 [sub_resource type="Animation" id=16]
 resource_name = "death"
 tracks/0/type = "value"
@@ -1178,73 +1231,17 @@ tracks/2/keys = {
 "values": [ 1 ]
 }
 
-[sub_resource type="Animation" id=14]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:texture_scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.3 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:energy")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.8 ]
-}
-
-[sub_resource type="Animation" id=15]
-resource_name = "light_animation"
-length = 5.0
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:texture_scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 2.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 0.3, 0.25 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:energy")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 2.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 0.9, 0.6 ]
-}
-
 [node name="Player" type="KinematicBody2D"]
-scale = Vector2( 0.8, 0.8 )
 collision_layer = 4
 collision_mask = 3
 script = ExtResource( 2 )
 speed = 100
 jump_speed = -175
-roll_speed = 300
+roll_speed = 100
+dash_speed = 1200
 wall_jump_speed = -150
 wall_gravity = 150
-player_gravity = 400
+player_gravity = 300
 wall_impulse_speed = 500
 magic_attack_cost = 5
 
@@ -1269,6 +1266,7 @@ anims/attack_left = SubResource( 21 )
 anims/attack_right = SubResource( 10 )
 anims/crouch = SubResource( 11 )
 anims/crouch_attack = SubResource( 25 )
+anims/dash = SubResource( 28 )
 anims/death = SubResource( 16 )
 anims/fall = SubResource( 4 )
 anims/full_crouch = SubResource( 26 )
@@ -1284,13 +1282,17 @@ anims/wall_slid = SubResource( 13 )
 
 [node name="LevelCamera" type="Camera2D" parent="."]
 current = true
-limit_top = 0
 limit_smoothed = true
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
 
+[node name="WallRay" type="RayCast2D" parent="."]
+position = Vector2( 0, 3 )
+enabled = true
+cast_to = Vector2( 6, 0 )
+collision_mask = 3
+
 [node name="AttackArea" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 8
 
@@ -1298,22 +1300,14 @@ collision_mask = 8
 scale = Vector2( 0.999999, 0.999999 )
 shape = SubResource( 8 )
 
-[node name="WallRay" type="RayCast2D" parent="."]
-enabled = true
-cast_to = Vector2( 10, 0 )
-collision_mask = 3
+[node name="CollisionArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
 
-[node name="Light2D" type="Light2D" parent="."]
-position = Vector2( -7.5, 13.75 )
-texture = ExtResource( 4 )
-texture_scale = 0.3
-color = Color( 1, 1, 2, 1 )
-energy = 0.8
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Light2D"]
-autoplay = "light_animation"
-anims/RESET = SubResource( 14 )
-anims/light_animation = SubResource( 15 )
+[node name="Collision" type="CollisionShape2D" parent="CollisionArea"]
+position = Vector2( -6.25, 21.25 )
+scale = Vector2( 0.8, 0.8 )
+shape = SubResource( 7 )
 
 [node name="Stats" type="Node" parent="." groups=["player_stats"]]
 script = ExtResource( 5 )
@@ -1324,14 +1318,9 @@ collision_area = NodePath("../CollisionArea")
 [node name="InvencibilityTimer" type="Timer" parent="Stats"]
 one_shot = true
 
-[node name="CollisionArea" type="Area2D" parent="."]
-collision_layer = 4
-collision_mask = 0
-
-[node name="Collision" type="CollisionShape2D" parent="CollisionArea"]
-position = Vector2( -1.25, 16.25 )
-shape = SubResource( 7 )
+[node name="PlayerDash" parent="." instance=ExtResource( 19 )]
+player = NodePath("..")
 
 [connection signal="animation_finished" from="Animation" to="Texture" method="_on_animation_finished"]
-[connection signal="timeout" from="Stats/InvencibilityTimer" to="Stats" method="on_invencibility_timer_timeout"]
 [connection signal="area_entered" from="CollisionArea" to="Stats" method="on_collision_area_entered"]
+[connection signal="timeout" from="Stats/InvencibilityTimer" to="Stats" method="on_invencibility_timer_timeout"]

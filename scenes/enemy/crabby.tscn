@@ -473,7 +473,6 @@ proximity_threshold = 20
 raycast_default_position = -16
 
 [node name="Collision" parent="." index="0"]
-visible = false
 position = Vector2( 1, 4.5 )
 shape = SubResource( 12 )
 
@@ -483,7 +482,6 @@ hframes = 9
 script = ExtResource( 8 )
 
 [node name="Collision" parent="DetectionArea" index="0"]
-visible = false
 position = Vector2( 0, -2.5 )
 shape = SubResource( 10 )
 
@@ -493,7 +491,6 @@ health = 8
 invulnerability_timer = 1.2
 
 [node name="Collision" parent="CollisionArea" index="1"]
-visible = false
 position = Vector2( 1, 1.5 )
 shape = SubResource( 11 )
 
@@ -502,7 +499,6 @@ damage = 6
 invencibility_timer = 1.0
 
 [node name="Collision" parent="EnemyAttackArea" index="0"]
-visible = false
 position = Vector2( 2, 5.5 )
 shape = SubResource( 7 )
 

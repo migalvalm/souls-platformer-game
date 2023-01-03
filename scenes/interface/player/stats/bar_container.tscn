@@ -1,12 +1,19 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://assets/interface/stats/bar/health_bar_background.png" type="Texture" id=1]
-[ext_resource path="res://assets/interface/stats/bar/health_bar.png" type="Texture" id=2]
-[ext_resource path="res://assets/interface/stats/bar/mana_bar_background.png" type="Texture" id=3]
-[ext_resource path="res://assets/interface/stats/bar/exp_bar_background.png" type="Texture" id=4]
-[ext_resource path="res://assets/interface/stats/bar/mana_bar.png" type="Texture" id=5]
+[ext_resource path="res://assets/interface/stats/icon/health_icon.png" type="Texture" id=1]
+[ext_resource path="res://assets/interface/stats/icon/attack_icon.png" type="Texture" id=2]
+[ext_resource path="res://assets/interface/stats/icon/magic_attack_icon.png" type="Texture" id=3]
 [ext_resource path="res://assets/interface/stats/bar/exp_bar.png" type="Texture" id=6]
 [ext_resource path="res://scripts/interface/player/bar_container.gd" type="Script" id=7]
+[ext_resource path="res://v2_assets/interface/gui/gui_paper.png" type="Texture" id=8]
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 8 )
+region = Rect2( 449, 175, 30, 2 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 8 )
+region = Rect2( 449, 143, 30, 2 )
 
 [node name="BarContainer" type="Control" groups=["bar_container"]]
 anchor_right = 1.0
@@ -16,45 +23,66 @@ script = ExtResource( 7 )
 [node name="HealthBarBackground" type="TextureRect" parent="."]
 margin_left = 5.0
 margin_top = 5.0
-margin_right = 69.0
-margin_bottom = 22.0
+margin_right = 5.0
+margin_bottom = 5.0
+
+[node name="HealthIcon" type="Sprite" parent="HealthBarBackground"]
+position = Vector2( 7, 6 )
+scale = Vector2( 0.7, 0.7 )
 texture = ExtResource( 1 )
 
 [node name="HealthBar" type="TextureProgress" parent="HealthBarBackground"]
-margin_left = 17.0
-margin_top = 7.0
-margin_right = 60.0
-margin_bottom = 9.0
-texture_progress = ExtResource( 2 )
+margin_left = 12.0
+margin_top = 5.0
+margin_right = 42.0
+margin_bottom = 7.0
+rect_scale = Vector2( 2, 1 )
+value = 100.0
+texture_progress = SubResource( 2 )
 
 [node name="ExpBarBackground" type="TextureRect" parent="."]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -69.0
-margin_top = 5.0
-margin_bottom = 17.0
-texture = ExtResource( 4 )
+margin_left = -90.2806
+margin_top = 11.6837
+margin_right = -0.28064
+margin_bottom = 11.6837
+
+[node name="ExpIcon" type="Sprite" parent="ExpBarBackground"]
+position = Vector2( 72.1268, -0.980736 )
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 2 )
 
 [node name="ExpBar" type="TextureProgress" parent="ExpBarBackground"]
-margin_left = 4.0
-margin_top = 7.0
-margin_right = 47.0
-margin_bottom = 9.0
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -21.5
+margin_top = -2.0
+margin_right = 21.5
+value = 100.0
 texture_progress = ExtResource( 6 )
 fill_mode = 1
 
 [node name="ManaBarBackground" type="TextureRect" parent="."]
-margin_left = 19.0
-margin_top = 22.0
-margin_right = 50.0
-margin_bottom = 15.0
+margin_left = 5.0
+margin_top = 21.0
+margin_right = 81.0
+margin_bottom = 33.0
+
+[node name="StaminaIcon" type="Sprite" parent="ManaBarBackground"]
+position = Vector2( 6.49942, 6.02911 )
+scale = Vector2( 0.7, 0.7 )
 texture = ExtResource( 3 )
 
 [node name="ManaBar" type="TextureProgress" parent="ManaBarBackground"]
-margin_left = 15.0
-margin_top = 7.0
-margin_right = 47.0
-margin_bottom = 8.0
-texture_progress = ExtResource( 5 )
+margin_left = 12.0
+margin_top = 5.0
+margin_right = 42.0
+margin_bottom = 7.0
+rect_scale = Vector2( 2, 1 )
+value = 100.0
+texture_progress = SubResource( 4 )
 
 [node name="Tween" type="Tween" parent="."]

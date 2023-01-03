@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/gui_paper.png-8c547f2f2eb47208fa5b58a9b1d12d1b.stex"
+path="res://.import/oak_woods_tileset.png-24ef8023945dfae5cf26d586b3c3b0b8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://v2_assets/interface/gui/gui_paper.png"
-dest_files=[ "res://.import/gui_paper.png-8c547f2f2eb47208fa5b58a9b1d12d1b.stex" ]
+source_file="res://assets/tile/terrain/oak_woods_tileset.png"
+dest_files=[ "res://.import/oak_woods_tileset.png-24ef8023945dfae5cf26d586b3c3b0b8.stex" ]
 
 [params]
 
@@ -31,5 +31,5 @@ process/invert_color=false
 process/normal_map_invert_y=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0

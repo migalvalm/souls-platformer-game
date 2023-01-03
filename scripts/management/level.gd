@@ -1,4 +1,4 @@
-extends Node2D
+ extends Node2D
 class_name Level
 
 onready var player: KinematicBody2D = get_node("Player")
