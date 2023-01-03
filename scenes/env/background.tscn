@@ -8,8 +8,8 @@
 [ext_resource path="res://scenes/env/mask.tscn" type="PackedScene" id=6]
 
 [node name="Background" type="ParallaxBackground"]
+scroll_ignore_camera_zoom = true
 script = ExtResource( 5 )
-can_process = true
 layer_speed = [ 20, 15, 10, 5 ]
 
 [node name="Layer4" type="ParallaxLayer" parent="."]

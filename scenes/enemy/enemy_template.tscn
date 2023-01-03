@@ -48,6 +48,20 @@ script = ExtResource( 5 )
 
 [node name="FloorRay" type="RayCast2D" parent="."]
 
+[node name="EnemyBar" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="BarBackground" type="TextureRect" parent="EnemyBar"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="TextureProgress" type="TextureProgress" parent="EnemyBar/BarBackground"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Tween" type="Tween" parent="EnemyBar"]
+
 [connection signal="body_entered" from="DetectionArea" to="DetectionArea" method="on_body_entered"]
 [connection signal="body_exited" from="DetectionArea" to="DetectionArea" method="on_body_exited"]
 [connection signal="area_entered" from="CollisionArea" to="CollisionArea" method="on_collision_area_entered"]

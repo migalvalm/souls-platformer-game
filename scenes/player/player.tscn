@@ -1238,11 +1238,11 @@ script = ExtResource( 2 )
 speed = 100
 jump_speed = -175
 roll_speed = 100
-dash_speed = 1200
+dash_speed = 1500
 wall_jump_speed = -150
-wall_gravity = 150
+wall_gravity = 100
 player_gravity = 300
-wall_impulse_speed = 500
+wall_impulse_speed = 400
 magic_attack_cost = 5
 
 [node name="Texture" type="Sprite" parent="."]
@@ -1282,6 +1282,9 @@ anims/wall_slid = SubResource( 13 )
 
 [node name="LevelCamera" type="Camera2D" parent="."]
 current = true
+zoom = Vector2( 1.1, 1.1 )
+process_mode = 0
+limit_top = 0
 limit_smoothed = true
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
