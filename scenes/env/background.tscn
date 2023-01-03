@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/tile/parallax_background/layer_1.png" type="Texture" id=1]
 [ext_resource path="res://assets/tile/parallax_background/layer_2.png" type="Texture" id=2]
@@ -6,6 +6,69 @@
 [ext_resource path="res://assets/tile/parallax_background/layer_4.png" type="Texture" id=4]
 [ext_resource path="res://scripts/env/background.gd" type="Script" id=5]
 [ext_resource path="res://scenes/env/mask.tscn" type="PackedScene" id=6]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+// Amount of detail.
+uniform int octaves = 4;
+
+// Opacity of the output fog.
+uniform float starting_amplitude: hint_range(0.0, 0.5) = 0.5;
+
+// Rate of pattern within the fog.
+uniform float starting_frequency = 1.0;
+
+// Shift towards transparency (clamped) for sparser fog.
+uniform float shift: hint_range(-1.0, 0.0) = -0.2;
+
+// Direction and speed of travel.
+uniform vec2 velocity = vec2(1.0, 1.0);
+
+// Color of the fog.
+uniform vec4 fog_color: hint_color = vec4(0.0, 0.0, 0.0, 1.0);
+
+// Noise texture; OpenSimplexNoise is great, but any filtered texture is fine.
+uniform sampler2D noise;
+
+float rand(vec2 uv) {
+	float amplitude = starting_amplitude;
+	float frequency = starting_frequency;
+	float output = 0.0;
+	for (int i = 0; i < octaves; i++) {
+		output += texture(noise, uv * frequency).x * amplitude;
+		amplitude /= 2.0;
+		frequency *= 2.0;
+	}
+	return clamp(output + shift, 0.0, 1.0);
+}
+
+void fragment() {
+	vec2 motion = vec2(rand(UV + TIME * starting_frequency * velocity));
+	COLOR = mix(vec4(0.0), fog_color, rand(UV + motion));
+}"
+
+[sub_resource type="OpenSimplexNoise" id=3]
+seed = 5
+persistence = 1.0
+lacunarity = 1.0
+
+[sub_resource type="NoiseTexture" id=4]
+flags = 51
+seamless = true
+noise = SubResource( 3 )
+noise_offset = Vector2( 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=2]
+render_priority = 1
+shader = SubResource( 1 )
+shader_param/octaves = 8
+shader_param/starting_amplitude = 0.5
+shader_param/starting_frequency = 1.0
+shader_param/shift = -0.271
+shader_param/velocity = Vector2( 0.01, 0 )
+shader_param/fog_color = Color( 0.317647, 0.298039, 0.298039, 1 )
+shader_param/noise = SubResource( 4 )
 
 [node name="Background" type="ParallaxBackground"]
 scroll_ignore_camera_zoom = true
@@ -22,7 +85,7 @@ texture = ExtResource( 4 )
 
 [node name="Layer1" type="ParallaxLayer" parent="."]
 motion_scale = Vector2( 0.4, 1 )
-motion_mirroring = Vector2( 320, 0 )
+motion_mirroring = Vector2( 320, 180 )
 
 [node name="Texture" type="TextureRect" parent="Layer1"]
 margin_right = 40.0
@@ -31,7 +94,7 @@ texture = ExtResource( 1 )
 
 [node name="Layer2" type="ParallaxLayer" parent="."]
 motion_scale = Vector2( 0.6, 1 )
-motion_mirroring = Vector2( 320, 0 )
+motion_mirroring = Vector2( 320, 180 )
 
 [node name="Texture" type="TextureRect" parent="Layer2"]
 margin_right = 40.0
@@ -40,9 +103,10 @@ texture = ExtResource( 2 )
 
 [node name="Layer3" type="ParallaxLayer" parent="."]
 motion_scale = Vector2( 0.8, 1 )
-motion_mirroring = Vector2( 320, 0 )
+motion_mirroring = Vector2( 320, 180 )
 
 [node name="Texture" type="TextureRect" parent="Layer3"]
+material = SubResource( 2 )
 margin_right = 40.0
 margin_bottom = 40.0
 texture = ExtResource( 3 )

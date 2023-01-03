@@ -3,6 +3,7 @@
 [ext_resource path="res://scripts/env/effect_template.gd" type="Script" id=1]
 
 [node name="EffectTemplate" type="AnimatedSprite"]
+z_index = 1
 script = ExtResource( 1 )
 
 [connection signal="animation_finished" from="." to="." method="on_animation_finished"]

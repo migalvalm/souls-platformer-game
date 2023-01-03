@@ -1,0 +1,131 @@
+[gd_scene load_steps=11 format=2]
+
+[sub_resource type="Shader" id=2]
+code = "shader_type canvas_item;
+
+// Amount of detail.
+uniform int octaves = 4;
+
+// Opacity of the output fog.
+uniform float starting_amplitude: hint_range(0.0, 0.5) = 0.5;
+
+// Rate of pattern within the fog.
+uniform float starting_frequency = 1.0;
+
+// Shift towards transparency (clamped) for sparser fog.
+uniform float shift: hint_range(-1.0, 0.0) = -0.2;
+
+// Direction and speed of travel.
+uniform vec2 velocity = vec2(1.0, 1.0);
+
+// Color of the fog.
+uniform vec4 fog_color: hint_color = vec4(0.0, 0.0, 0.0, 1.0);
+
+// Noise texture; OpenSimplexNoise is great, but any filtered texture is fine.
+uniform sampler2D noise;
+
+float rand(vec2 uv) {
+	float amplitude = starting_amplitude;
+	float frequency = starting_frequency;
+	float output = 0.0;
+	for (int i = 0; i < octaves; i++) {
+		output += texture(noise, uv * frequency).x * amplitude;
+		amplitude /= 2.0;
+		frequency *= 2.0;
+	}
+	return clamp(output + shift, 0.0, 1.0);
+}
+
+void fragment() {
+	vec2 motion = vec2(rand(UV + TIME * starting_frequency * velocity));
+	COLOR = mix(vec4(0.0), fog_color, rand(UV + motion));
+}"
+
+[sub_resource type="OpenSimplexNoise" id=4]
+seed = 41
+octaves = 7
+period = 85.3
+persistence = 0.603
+lacunarity = 1.94
+
+[sub_resource type="NoiseTexture" id=5]
+width = 99
+height = 100
+seamless = true
+noise = SubResource( 4 )
+noise_offset = Vector2( 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=3]
+render_priority = 101
+shader = SubResource( 2 )
+shader_param/octaves = 7
+shader_param/starting_amplitude = 0.5
+shader_param/starting_frequency = 1.0
+shader_param/shift = -0.093
+shader_param/velocity = Vector2( 0.01, 0 )
+shader_param/fog_color = Color( 0.192157, 0.192157, 0.2, 0.976471 )
+shader_param/noise = SubResource( 5 )
+
+[sub_resource type="OpenSimplexNoise" id=6]
+seed = 1
+octaves = 5
+period = 145.7
+
+[sub_resource type="NoiseTexture" id=7]
+width = 640
+height = 320
+seamless = true
+as_normalmap = true
+noise = SubResource( 6 )
+
+[sub_resource type="OpenSimplexNoise" id=11]
+seed = 1
+octaves = 7
+period = 100.7
+persistence = 0.361
+lacunarity = 1.05
+
+[sub_resource type="NoiseTexture" id=8]
+width = 1000
+height = 100
+seamless = true
+noise = SubResource( 11 )
+noise_offset = Vector2( 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=9]
+render_priority = 101
+shader = SubResource( 2 )
+shader_param/octaves = 5
+shader_param/starting_amplitude = 0.35
+shader_param/starting_frequency = 1.0
+shader_param/shift = -0.051
+shader_param/velocity = Vector2( 0.03, 0.03 )
+shader_param/fog_color = Color( 0.192157, 0.0156863, 0.0156863, 1 )
+shader_param/noise = SubResource( 8 )
+
+[sub_resource type="NoiseTexture" id=10]
+width = 640
+height = 320
+seamless = true
+noise = SubResource( 6 )
+
+[node name="Fog" type="CanvasLayer"]
+layer = 0
+
+[node name="fog_shader" type="TextureRect" parent="."]
+material = SubResource( 3 )
+anchor_left = -0.122
+anchor_top = 0.133
+anchor_right = -0.122
+anchor_bottom = 0.133
+margin_left = 39.04
+margin_top = -23.94
+margin_right = 679.04
+margin_bottom = 296.06
+texture = SubResource( 7 )
+
+[node name="thicker_fog_shader" type="TextureRect" parent="."]
+material = SubResource( 9 )
+margin_right = 640.0
+margin_bottom = 320.0
+texture = SubResource( 10 )

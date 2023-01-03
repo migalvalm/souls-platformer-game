@@ -70,7 +70,7 @@ func vertical_movement_env() -> void:
 	if Input.is_action_just_pressed("jump") and jump_count < 2 and can_move():
 		jump_count += 1
 
-		spawn_effect("res://scenes/effect/dust/jump.tscn", Vector2(0,22), is_flipped())
+		spawn_effect("res://scenes/effect/dust/jump.tscn", Vector2(0,30), is_flipped())
 		if next_to_wall() and not is_on_floor():
 			velocity.y = wall_jump_speed
 			velocity.x += wall_impulse_speed * direction
@@ -146,7 +146,7 @@ func dash() -> void:
 		player_dash.start_dash(0.2)
 		dashing = true
 		
-		player_dash.spawn_dash_effect(Vector2(0,10), is_flipped())
+		player_dash.spawn_dash_effect(Vector2(0,20), is_flipped())
 		velocity.x = dash_speed * direction
 
 func can_move() -> bool:

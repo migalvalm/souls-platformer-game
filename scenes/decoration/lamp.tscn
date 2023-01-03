@@ -15,7 +15,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 1.46 ]
+"values": [ 0.85 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Light2D:offset")
@@ -41,9 +41,9 @@ tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.5, 1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"transitions": PoolRealArray( 1, 1.31951, 1 ),
 "update": 0,
-"values": [ 1.46, 2.0, 1.46 ]
+"values": [ 1.5, 2.0, 1.5 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Light2D:offset")
@@ -55,7 +55,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.5, 1 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( -150, 0 ), Vector2( 150, 0 ), Vector2( -150, 0 ) ]
+"values": [ Vector2( -70, 0 ), Vector2( 70, 0 ), Vector2( -70, 0 ) ]
 }
 
 [node name="Lamp" type="Node2D"]
@@ -65,9 +65,9 @@ position = Vector2( 9, -34 )
 scale = Vector2( 0.181641, 0.18457 )
 texture = ExtResource( 1 )
 offset = Vector2( -290, 0 )
-texture_scale = 2.81
-color = Color( 0.72549, 0.619608, 0.0470588, 0.67451 )
-energy = 1.46
+texture_scale = 1.16
+color = Color( 0.835294, 0.827451, 0.705882, 0.533333 )
+energy = 0.85
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 2 )

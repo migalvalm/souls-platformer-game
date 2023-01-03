@@ -969,7 +969,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
-"args": [ "res://scenes/effect/dust/landing.tscn", Vector2( 0, 21 ), false ],
+"args": [ "res://scenes/effect/dust/landing.tscn", Vector2( 0, 30 ), false ],
 "method": "spawn_effect"
 } ]
 }
@@ -1050,10 +1050,10 @@ tracks/0/keys = {
 "times": PoolRealArray( 0.2, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
 "values": [ {
-"args": [ "res://scenes/effect/dust/run.tscn", Vector2( 0, 22 ), true ],
+"args": [ "res://scenes/effect/dust/run.tscn", Vector2( 0, 30 ), true ],
 "method": "spawn_effect"
 }, {
-"args": [ "res://scenes/effect/dust/run.tscn", Vector2( 0, 22 ), true ],
+"args": [ "res://scenes/effect/dust/run.tscn", Vector2( 0, 30 ), true ],
 "method": "spawn_effect"
 } ]
 }
@@ -1106,10 +1106,10 @@ tracks/0/keys = {
 "times": PoolRealArray( 0.2, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
 "values": [ {
-"args": [ "res://scenes/effect/dust/run.tscn", Vector2( 0, 22 ), false ],
+"args": [ "res://scenes/effect/dust/run.tscn", Vector2( 0, 30 ), false ],
 "method": "spawn_effect"
 }, {
-"args": [ "res://scenes/effect/dust/run.tscn", Vector2( 0, 22 ), false ],
+"args": [ "res://scenes/effect/dust/run.tscn", Vector2( 0, 30 ), false ],
 "method": "spawn_effect"
 } ]
 }
@@ -1283,8 +1283,6 @@ anims/wall_slid = SubResource( 13 )
 [node name="LevelCamera" type="Camera2D" parent="."]
 current = true
 zoom = Vector2( 1.1, 1.1 )
-process_mode = 0
-limit_top = 0
 limit_smoothed = true
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
@@ -1322,6 +1320,7 @@ collision_area = NodePath("../CollisionArea")
 one_shot = true
 
 [node name="PlayerDash" parent="." instance=ExtResource( 19 )]
+position = Vector2( -1, 0 )
 player = NodePath("..")
 
 [connection signal="animation_finished" from="Animation" to="Texture" method="_on_animation_finished"]
