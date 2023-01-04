@@ -72,8 +72,8 @@ octaves = 5
 period = 145.7
 
 [sub_resource type="NoiseTexture" id=7]
-width = 640
-height = 320
+width = 1820
+height = 1420
 seamless = true
 as_normalmap = true
 noise = SubResource( 6 )
@@ -99,18 +99,21 @@ shader_param/octaves = 5
 shader_param/starting_amplitude = 0.35
 shader_param/starting_frequency = 1.0
 shader_param/shift = -0.051
-shader_param/velocity = Vector2( 0.03, 0.03 )
-shader_param/fog_color = Color( 0.192157, 0.0156863, 0.0156863, 1 )
+shader_param/velocity = Vector2( 0.01, 0.01 )
+shader_param/fog_color = Color( 1, 1, 1, 0.564706 )
 shader_param/noise = SubResource( 8 )
 
 [sub_resource type="NoiseTexture" id=10]
-width = 640
-height = 320
+width = 1820
+height = 1420
 seamless = true
 noise = SubResource( 6 )
 
 [node name="Fog" type="CanvasLayer"]
-layer = 0
+layer = -1
+offset = Vector2( 320, 447 )
+transform = Transform2D( 1, 0, 0, 1, 320, 447 )
+follow_viewport_enable = true
 
 [node name="fog_shader" type="TextureRect" parent="."]
 material = SubResource( 3 )
@@ -118,14 +121,16 @@ anchor_left = -0.122
 anchor_top = 0.133
 anchor_right = -0.122
 anchor_bottom = 0.133
-margin_left = 39.04
-margin_top = -23.94
-margin_right = 679.04
-margin_bottom = 296.06
+margin_left = -270.96
+margin_top = -467.94
+margin_right = 1549.04
+margin_bottom = 952.06
 texture = SubResource( 7 )
 
 [node name="thicker_fog_shader" type="TextureRect" parent="."]
 material = SubResource( 9 )
-margin_right = 640.0
-margin_bottom = 320.0
+margin_left = -310.0
+margin_top = -444.0
+margin_right = 1510.0
+margin_bottom = 976.0
 texture = SubResource( 10 )

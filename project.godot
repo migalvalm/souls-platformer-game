@@ -24,6 +24,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/enemy/collision_area.gd"
 }, {
+"base": "GraphNode",
+"class": "CommonNode",
+"language": "GDScript",
+"path": "res://addons/project_map/pm_common_node.gd"
+}, {
 "base": "EnemyTemplate",
 "class": "Crabby",
 "language": "GDScript",
@@ -53,6 +58,11 @@ _global_script_classes=[ {
 "class": "EnemyAttackArea",
 "language": "GDScript",
 "path": "res://scripts/enemy/attack_area.gd"
+}, {
+"base": "Control",
+"class": "EnemyHealthBar",
+"language": "GDScript",
+"path": "res://scripts/enemy/enemy_bar.gd"
 }, {
 "base": "Node2D",
 "class": "EnemySpawner",
@@ -128,12 +138,14 @@ _global_script_class_icons={
 "Background": "",
 "BarContainer": "",
 "CollisionArea": "",
+"CommonNode": "",
 "Crabby": "",
 "CrabbyTexture": "",
 "DashTimer": "",
 "DetectionArea": "",
 "EffectTemplate": "",
 "EnemyAttackArea": "",
+"EnemyHealthBar": "",
 "EnemySpawner": "",
 "EnemyTemplate": "",
 "EnemyTexture": "",
@@ -164,13 +176,47 @@ settings/stdout/print_fps=true
 
 window/size/width=320
 window/size/height=180
+window/size/resizable=false
+window/size/borderless=true
 window/size/test_width=1280
 window/size/test_height=720
 window/stretch/mode="2d"
 
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/project_map/plugin.cfg" )
+
+[global]
+
+Tab=false
+
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true
+
+[importer_defaults]
+
+texture={
+"compress/bptc_ldr": 0,
+"compress/hdr_mode": 0,
+"compress/lossy_quality": 0.7,
+"compress/mode": 0,
+"compress/normal_map": 0,
+"detect_3d": false,
+"flags/anisotropic": false,
+"flags/filter": false,
+"flags/mipmaps": false,
+"flags/repeat": 0,
+"flags/srgb": 2,
+"process/HDR_as_SRGB": false,
+"process/fix_alpha_border": true,
+"process/invert_color": false,
+"process/normal_map_invert_y": false,
+"process/premult_alpha": false,
+"size_limit": 0,
+"stream": false,
+"svg/scale": 1.0
+}
 
 [input]
 
@@ -247,6 +293,7 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
+2d/options/use_nvidia_rect_flicker_workaround=true
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
 environment/default_environment="res://default_env.tres"

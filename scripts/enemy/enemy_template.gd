@@ -6,6 +6,7 @@ signal kill
 onready var texture: Sprite = get_node("Texture")
 onready var floor_ray: RayCast2D = get_node("FloorRay")
 onready var animation: AnimationPlayer = get_node("Animation")
+onready var enemy_bar: Control = get_node("EnemyBar")
 
 var can_die: bool = false
 var can_hit: bool = false
@@ -58,6 +59,8 @@ func floor_collision() -> bool:
 
 func verify_position() -> void:
 	if player_ref != null:
+		enemy_bar.visible = true
+		
 		var direction: float = sign(player_ref.global_position.x - global_position.x)
 
 		if direction > 0:

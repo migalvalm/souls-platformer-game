@@ -438,7 +438,6 @@ position = Vector2( 0, 3 )
 shape = SubResource( 5 )
 
 [node name="CollisionArea" parent="." index="3"]
-enemy = NodePath("..")
 health = 10
 invulnerability_timer = 1.0
 
@@ -469,3 +468,7 @@ anims/run = SubResource( 3 )
 position = Vector2( -33, 0 )
 enabled = true
 cast_to = Vector2( 0, 30 )
+
+[node name="EnemyBar" parent="." index="7"]
+margin_top = -38.0
+margin_bottom = -38.0

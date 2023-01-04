@@ -68,6 +68,7 @@ offset = Vector2( -290, 0 )
 texture_scale = 1.16
 color = Color( 0.835294, 0.827451, 0.705882, 0.533333 )
 energy = 0.85
+shadow_gradient_length = 200.0
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 2 )

@@ -1,0 +1,1525 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://addons/project_map/pm_file_node.gd" type="Script" id=1]
+[ext_resource path="res://addons/project_map/project_map.gd" type="Script" id=2]
+[ext_resource path="res://addons/project_map/pm_group_node.gd" type="Script" id=3]
+[ext_resource path="res://addons/project_map/pm_comment_node.gd" type="Script" id=4]
+[ext_resource path="res://addons/project_map/pm_comment_node.tscn" type="PackedScene" id=5]
+[ext_resource path="res://addons/project_map/pm_group_node.tscn" type="PackedScene" id=6]
+[ext_resource path="res://addons/project_map/pm_file_node.tscn" type="PackedScene" id=7]
+[ext_resource path="res://addons/project_map/group_selected.stylebox" type="StyleBox" id=8]
+[ext_resource path="res://addons/project_map/node.stylebox" type="StyleBox" id=9]
+[ext_resource path="res://addons/project_map/node_selected.stylebox" type="StyleBox" id=10]
+[ext_resource path="res://addons/project_map/group.stylebox" type="StyleBox" id=11]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.2, 0.231373, 0.309804, 1 )
+
+[sub_resource type="StyleBoxEmpty" id=6]
+
+[sub_resource type="StyleBoxEmpty" id=7]
+
+[node name="ProjectMap" type="GraphEdit"]
+margin_right = 795.0
+margin_bottom = 889.0
+rect_min_size = Vector2( 500, 500 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/bg = SubResource( 1 )
+scroll_offset = Vector2( -583.608, -803.708 )
+snap_distance = 30
+zoom = 0.6
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="GroupNode5" type="GraphNode" parent="." instance=ExtResource( 6 )]
+margin_left = 187.609
+margin_top = 443.708
+margin_right = 577.609
+margin_bottom = 713.708
+rect_min_size = Vector2( 390, 270 )
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_styles/commentfocus = ExtResource( 8 )
+custom_styles/comment = ExtResource( 11 )
+offset = Vector2( -660, -600 )
+resizable = true
+comment = true
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+group_name = "Env"
+
+[node name="GroupNode6" type="GraphNode" parent="." instance=ExtResource( 6 )]
+margin_left = 241.609
+margin_top = 623.708
+margin_right = 361.609
+margin_bottom = 713.708
+rect_min_size = Vector2( 120, 90 )
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_styles/commentfocus = ExtResource( 8 )
+custom_styles/comment = ExtResource( 11 )
+offset = Vector2( -570, -300 )
+resizable = true
+comment = true
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+group_name = "Interface"
+
+[node name="GroupNode2" type="GraphNode" parent="." instance=ExtResource( 6 )]
+margin_left = 205.609
+margin_top = 695.708
+margin_right = 445.609
+margin_bottom = 1055.71
+rect_min_size = Vector2( 240, 360 )
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_styles/commentfocus = ExtResource( 8 )
+custom_styles/comment = ExtResource( 11 )
+offset = Vector2( -630, -180 )
+resizable = true
+comment = true
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+group_name = "Player"
+
+[node name="GroupNode8" type="GraphNode" parent="." instance=ExtResource( 6 )]
+margin_left = 7.60858
+margin_top = 443.708
+margin_right = 277.609
+margin_bottom = 593.708
+rect_min_size = Vector2( 270, 150 )
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_styles/commentfocus = ExtResource( 8 )
+custom_styles/comment = ExtResource( 11 )
+offset = Vector2( -960, -600 )
+resizable = true
+comment = true
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+group_name = "Resources"
+
+[node name="GroupNode9" type="GraphNode" parent="." instance=ExtResource( 6 )]
+margin_left = -118.391
+margin_top = 407.708
+margin_right = 61.6086
+margin_bottom = 1007.71
+rect_min_size = Vector2( 180, 600 )
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_styles/commentfocus = ExtResource( 8 )
+custom_styles/comment = ExtResource( 11 )
+offset = Vector2( -1170, -660 )
+resizable = true
+comment = true
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+group_name = "Assets"
+
+[node name="CommentNode3" type="GraphNode" parent="." instance=ExtResource( 5 )]
+margin_left = -119.141
+margin_top = 620.708
+margin_right = 37.1086
+margin_bottom = 677.708
+rect_min_size = Vector2( 156.25, 56.25 )
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_styles/commentfocus = SubResource( 6 )
+custom_styles/comment = SubResource( 7 )
+offset = Vector2( -1171.25, -305 )
+comment = true
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+comment_text = "Assets V2
+"
+comment_rect = Vector2( 156.25, 56.25 )
+
+[node name="CommentNode" type="GraphNode" parent="." instance=ExtResource( 5 )]
+margin_left = -122.141
+margin_top = 409.208
+margin_right = 27.8585
+margin_bottom = 466.208
+rect_min_size = Vector2( 150, 50.0001 )
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_styles/commentfocus = SubResource( 6 )
+custom_styles/comment = SubResource( 7 )
+offset = Vector2( -1176.25, -657.5 )
+comment = true
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+comment_text = "Assets V1 
+
+ Use the handle to resize"
+comment_rect = Vector2( 150, 50.0001 )
+
+[node name="GroupNode3" type="GraphNode" parent="." instance=ExtResource( 6 )]
+margin_left = 313.608
+margin_top = 443.708
+margin_right = 493.609
+margin_bottom = 533.708
+rect_min_size = Vector2( 180, 90 )
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_styles/commentfocus = ExtResource( 8 )
+custom_styles/comment = ExtResource( 11 )
+offset = Vector2( -450, -600 )
+resizable = true
+comment = true
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+group_name = "EnemySpawner"
+
+[node name="GroupNode" type="GraphNode" parent="." instance=ExtResource( 6 )]
+margin_left = 313.608
+margin_top = 191.708
+margin_right = 733.609
+margin_bottom = 581.708
+rect_min_size = Vector2( 420, 390 )
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_styles/commentfocus = ExtResource( 8 )
+custom_styles/comment = ExtResource( 11 )
+offset = Vector2( -450, -1020 )
+resizable = true
+comment = true
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+group_name = "Enemy"
+
+[node name="GroupNode4" type="GraphNode" parent="." instance=ExtResource( 6 )]
+margin_left = 457.608
+margin_top = 461.708
+margin_right = 757.609
+margin_bottom = 701.708
+rect_min_size = Vector2( 300, 240 )
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_styles/commentfocus = ExtResource( 8 )
+custom_styles/comment = ExtResource( 11 )
+offset = Vector2( -210, -570 )
+resizable = true
+comment = true
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+group_name = "Effect"
+
+[node name="GroupNode7" type="GraphNode" parent="." instance=ExtResource( 6 )]
+margin_left = 133.609
+margin_top = 335.708
+margin_right = 279.609
+margin_bottom = 485.708
+rect_min_size = Vector2( 120, 150 )
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_styles/commentfocus = ExtResource( 8 )
+custom_styles/comment = ExtResource( 11 )
+offset = Vector2( -750, -780 )
+resizable = true
+comment = true
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+group_name = "Management"
+
+[node name="FileNode11" type="GraphNode" parent="." instance=ExtResource( 7 )]
+margin_left = 205.609
+margin_top = 749.708
+margin_right = 349.609
+margin_bottom = 781.708
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 9 )
+custom_styles/selectedframe = ExtResource( 10 )
+offset = Vector2( -630, -90 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://scripts/player/player_stats.gd"
+resource_type = 2
+icon_class = "Script"
+
+[node name="FileNode12" type="GraphNode" parent="." instance=ExtResource( 7 )]
+margin_left = 205.609
+margin_top = 767.708
+margin_right = 365.609
+margin_bottom = 799.708
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 9 )
+custom_styles/selectedframe = ExtResource( 10 )
+offset = Vector2( -630, -60 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://scripts/player/player_texture.gd"
+resource_type = 2
+icon_class = "Script"
+
+[node name="FileNode10" type="GraphNode" parent="." instance=ExtResource( 7 )]
+margin_left = 205.609
+margin_top = 803.708
+margin_right = 360.609
+margin_bottom = 865.708
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 9 )
+custom_styles/selectedframe = ExtResource( 10 )
+offset = Vector2( -630, 0 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://scenes/player/player_dash.tscn"
+icon_class = "Node2D"
+script_path = "res://scripts/player/player_dash.gd"
+script_name = "player_dash.gd"
+
+[node name="FileNode18" type="GraphNode" parent="." instance=ExtResource( 7 )]
+margin_left = 187.609
+margin_top = 461.708
+margin_right = 342.609
+margin_bottom = 523.708
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 9 )
+custom_styles/selectedframe = ExtResource( 10 )
+offset = Vector2( -660, -570 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://scenes/env/background.tscn"
+icon_class = "ParallaxBackground"
+script_path = "res://scripts/env/background.gd"
+script_name = "background.gd"
+
+[node name="FileNode22" type="GraphNode" parent="." instance=ExtResource( 7 )]
+margin_left = 187.609
+margin_top = 569.708
+margin_right = 340.609
+margin_bottom = 631.708
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 9 )
+custom_styles/selectedframe = ExtResource( 10 )
+offset = Vector2( -660, -390 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://scenes/env/physic_item.tscn"
+icon_class = "RigidBody2D"
+script_path = "res://scripts/env/physic_item.gd"
+script_name = "physic_item.gd"
+
+[node name="FileNode13" type="GraphNode" parent="." instance=ExtResource( 7 )]
+margin_left = 457.608
+margin_top = 479.708
+margin_right = 635.609
+margin_bottom = 541.708
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 9 )
+custom_styles/selectedframe = ExtResource( 10 )
+offset = Vector2( -210, -540 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://scenes/effect/template/effect_template.tscn"
+icon_class = "AnimatedSprite"
+script_path = "res://scripts/env/effect_template.gd"
+script_name = "effect_template.gd"
+
+[node name="FileNode14" type="GraphNode" parent="." instance=ExtResource( 7 )]
+margin_left = 457.608
+margin_top = 533.708
+margin_right = 529.609
+margin_bottom = 565.708
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 9 )
+custom_styles/selectedframe = ExtResource( 10 )
+offset = Vector2( -210, -450 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://scenes/effect/dust/"
+resource_type = 4
+icon_class = "Folder"
+
+[node name="FileNode15" type="GraphNode" parent="." instance=ExtResource( 7 )]
+margin_left = 457.608
+margin_top = 551.708
+margin_right = 547.609
+margin_bottom = 583.708
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 9 )
+custom_styles/selectedframe = ExtResource( 10 )
+offset = Vector2( -210, -420 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://scenes/effect/fireball/"
+resource_type = 4
+icon_class = "Folder"
+
+[node name="FileNode16" type="GraphNode" parent="." instance=ExtResource( 7 )]
+margin_left = 457.608
+margin_top = 569.708
+margin_right = 602.609
+margin_bottom = 601.708
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 9 )
+custom_styles/selectedframe = ExtResource( 10 )
+offset = Vector2( -210, -390 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://scenes/effect/general_effects/"
+resource_type = 4
+icon_class = "Folder"
+
+[node name="FileNode17" type="GraphNode" parent="." instance=ExtResource( 7 )]
+margin_left = 457.608
+margin_top = 587.708
+margin_right = 559.609
+margin_bottom = 619.708
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 9 )
+custom_styles/selectedframe = ExtResource( 10 )
+offset = Vector2( -210, -360 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://scenes/effect/template/"
+resource_type = 4
+icon_class = "Folder"
+
+[node name="FileNode9" type="GraphNode" parent="." instance=ExtResource( 7 )]
+margin_left = 205.609
+margin_top = 713.708
+margin_right = 321.609
+margin_bottom = 775.708
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 9 )
+custom_styles/selectedframe = ExtResource( 10 )
+offset = Vector2( -630, -150 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://scenes/player/player.tscn"
+icon_class = "KinematicBody2D"
+script_path = "res://scripts/player/player.gd"
+script_name = "player.gd"
+
+[node name="FileNode33" type="GraphNode" parent="." instance=ExtResource( 7 )]
+margin_left = 133.609
+margin_top = 371.708
+margin_right = 238.609
+margin_bottom = 433.708
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 9 )
+custom_styles/selectedframe = ExtResource( 10 )
+offset = Vector2( -750, -720 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://scenes/management/level.tscn"
+icon_class = "Node2D"
+script_path = "res://scripts/management/level.gd"
+script_name = "level.gd"
+
+[node name="FileNode34" type="GraphNode" parent="." instance=ExtResource( 7 )]
+margin_left = 7.60858
+margin_top = 479.708
+margin_right = 110.609
+margin_bottom = 511.708
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 9 )
+custom_styles/selectedframe = ExtResource( 10 )
+offset = Vector2( -960, -540 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://resources/floor.tres"
+resource_type = 3
+icon_class = "TileSet"
+
+[node name="FileNode35" type="GraphNode" parent="." instance=ExtResource( 7 )]
+margin_left = 7.60858
+margin_top = 497.708
+margin_right = 232.609
+margin_bottom = 529.708
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 9 )
+custom_styles/selectedframe = ExtResource( 10 )
+offset = Vector2( -960, -510 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://resources/normal_decoration_tile.tres"
+resource_type = 3
+icon_class = "TileSet"
+
+[node name="FileNode36" type="GraphNode" parent="." instance=ExtResource( 7 )]
+margin_left = 7.60858
+margin_top = 515.708
+margin_right = 220.609
+margin_bottom = 547.708
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 9 )
+custom_styles/selectedframe = ExtResource( 10 )
+offset = Vector2( -960, -480 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://resources/small_decoration_tile.tres"
+resource_type = 3
+icon_class = "TileSet"
+
+[node name="FileNode39" type="GraphNode" parent="." instance=ExtResource( 7 )]
+margin_left = -100.391
+margin_top = 461.708
+margin_right = -20.3914
+margin_bottom = 493.708
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 9 )
+custom_styles/selectedframe = ExtResource( 10 )
+offset = Vector2( -1140, -570 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://assets/effect/"
+resource_type = 4
+icon_class = "Folder"
+
+[node name="FileNode40" type="GraphNode" parent="." instance=ExtResource( 7 )]
+margin_left = -100.391
+margin_top = 479.708
+margin_right = -13.3914
+margin_bottom = 511.708
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 9 )
+custom_styles/selectedframe = ExtResource( 10 )
+offset = Vector2( -1140, -540 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://assets/enemy/"
+resource_type = 4
+icon_class = "Folder"
+
+[node name="FileNode41" type="GraphNode" parent="." instance=ExtResource( 7 )]
+margin_left = -100.391
+margin_top = 497.708
+margin_right = -31.3914
+margin_bottom = 529.708
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 9 )
+custom_styles/selectedframe = ExtResource( 10 )
+offset = Vector2( -1140, -510 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://assets/font/"
+resource_type = 4
+icon_class = "Folder"
+
+[node name="FileNode42" type="GraphNode" parent="." instance=ExtResource( 7 )]
+margin_left = -100.391
+margin_top = 515.708
+margin_right = 22.6088
+margin_bottom = 547.708
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 9 )
+custom_styles/selectedframe = ExtResource( 10 )
+offset = Vector2( -1140, -480 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://assets/interactable/"
+resource_type = 4
+icon_class = "Folder"
+
+[node name="FileNode43" type="GraphNode" parent="." instance=ExtResource( 7 )]
+margin_left = -100.391
+margin_top = 533.708
+margin_right = 1.60864
+margin_bottom = 565.708
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 9 )
+custom_styles/selectedframe = ExtResource( 10 )
+offset = Vector2( -1140, -450 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://assets/interface/"
+resource_type = 4
+icon_class = "Folder"
+
+[node name="FileNode44" type="GraphNode" parent="." instance=ExtResource( 7 )]
+margin_left = -100.391
+margin_top = 551.708
+margin_right = -28.3914
+margin_bottom = 583.708
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 9 )
+custom_styles/selectedframe = ExtResource( 10 )
+offset = Vector2( -1140, -420 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://assets/item/"
+resource_type = 4
+icon_class = "Folder"
+
+[node name="FileNode37" type="GraphNode" parent="." instance=ExtResource( 7 )]
+margin_left = -100.391
+margin_top = 569.708
+margin_right = 13.6088
+margin_bottom = 601.708
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 9 )
+custom_styles/selectedframe = ExtResource( 10 )
+offset = Vector2( -1140, -390 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://assets/decoration/"
+resource_type = 4
+icon_class = "Folder"
+
+[node name="FileNode38" type="GraphNode" parent="." instance=ExtResource( 7 )]
+margin_left = -100.391
+margin_top = 587.708
+margin_right = -30.3914
+margin_bottom = 619.708
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 9 )
+custom_styles/selectedframe = ExtResource( 10 )
+offset = Vector2( -1140, -360 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://assets/dice/"
+resource_type = 4
+icon_class = "Folder"
+
+[node name="FileNode24" type="GraphNode" parent="." instance=ExtResource( 7 )]
+margin_left = 241.609
+margin_top = 641.708
+margin_right = 335.609
+margin_bottom = 673.708
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 9 )
+custom_styles/selectedframe = ExtResource( 10 )
+offset = Vector2( -570, -270 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://scenes/interface/general/"
+resource_type = 4
+icon_class = "Folder"
+
+[node name="FileNode26" type="GraphNode" parent="." instance=ExtResource( 7 )]
+margin_left = 241.609
+margin_top = 659.708
+margin_right = 325.609
+margin_bottom = 691.708
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 9 )
+custom_styles/selectedframe = ExtResource( 10 )
+offset = Vector2( -570, -240 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://scenes/interface/player/"
+resource_type = 4
+icon_class = "Folder"
+
+[node name="FileNode45" type="GraphNode" parent="." instance=ExtResource( 7 )]
+margin_left = -100.391
+margin_top = 605.708
+margin_right = -9.39136
+margin_bottom = 637.708
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 9 )
+custom_styles/selectedframe = ExtResource( 10 )
+offset = Vector2( -1140, -330 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://assets/sounds/"
+resource_type = 4
+icon_class = "Folder"
+
+[node name="FileNode46" type="GraphNode" parent="." instance=ExtResource( 7 )]
+margin_left = -100.391
+margin_top = 443.708
+margin_right = -37.3914
+margin_bottom = 475.708
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 9 )
+custom_styles/selectedframe = ExtResource( 10 )
+offset = Vector2( -1140, -600 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://assets/tile/"
+resource_type = 4
+icon_class = "Folder"
+
+[node name="FileNode47" type="GraphNode" parent="." instance=ExtResource( 7 )]
+margin_left = -100.391
+margin_top = 659.708
+margin_right = 1.60864
+margin_bottom = 691.708
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 9 )
+custom_styles/selectedframe = ExtResource( 10 )
+offset = Vector2( -1140, -240 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://v2_assets/interface/"
+resource_type = 4
+icon_class = "Folder"
+
+[node name="FileNode" type="GraphNode" parent="." instance=ExtResource( 7 )]
+margin_left = -100.391
+margin_top = 677.708
+margin_right = -13.3914
+margin_bottom = 709.708
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 9 )
+custom_styles/selectedframe = ExtResource( 10 )
+offset = Vector2( -1140, -210 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://v2_assets/enemy/"
+resource_type = 4
+icon_class = "Folder"
+
+[node name="FileNode48" type="GraphNode" parent="." instance=ExtResource( 7 )]
+margin_left = -100.391
+margin_top = 695.708
+margin_right = -16.3914
+margin_bottom = 727.708
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 9 )
+custom_styles/selectedframe = ExtResource( 10 )
+offset = Vector2( -1140, -180 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://v2_assets/player/"
+resource_type = 4
+icon_class = "Folder"
+
+[node name="FileNode49" type="GraphNode" parent="." instance=ExtResource( 7 )]
+margin_left = -100.391
+margin_top = 713.708
+margin_right = -31.3914
+margin_bottom = 745.708
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 9 )
+custom_styles/selectedframe = ExtResource( 10 )
+offset = Vector2( -1140, -150 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://v2_assets/font/"
+resource_type = 4
+icon_class = "Folder"
+
+[node name="FileNode6" type="GraphNode" parent="." instance=ExtResource( 7 )]
+margin_left = 313.608
+margin_top = 281.708
+margin_right = 476.609
+margin_bottom = 313.708
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 9 )
+custom_styles/selectedframe = ExtResource( 10 )
+offset = Vector2( -450, -870 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://scripts/enemy/detection_area.gd"
+resource_type = 2
+icon_class = "Script"
+
+[node name="FileNode7" type="GraphNode" parent="." instance=ExtResource( 7 )]
+margin_left = 313.608
+margin_top = 299.708
+margin_right = 468.609
+margin_bottom = 331.708
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 9 )
+custom_styles/selectedframe = ExtResource( 10 )
+offset = Vector2( -450, -840 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://scripts/enemy/collision_area.gd"
+resource_type = 2
+icon_class = "Script"
+
+[node name="FileNode8" type="GraphNode" parent="." instance=ExtResource( 7 )]
+margin_left = 313.608
+margin_top = 317.708
+margin_right = 453.609
+margin_bottom = 349.708
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 9 )
+custom_styles/selectedframe = ExtResource( 10 )
+offset = Vector2( -450, -810 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://scripts/enemy/attack_area.gd"
+resource_type = 2
+icon_class = "Script"
+
+[node name="FileNode19" type="GraphNode" parent="." instance=ExtResource( 7 )]
+margin_left = 313.608
+margin_top = 461.708
+margin_right = 496.609
+margin_bottom = 523.708
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 9 )
+custom_styles/selectedframe = ExtResource( 10 )
+offset = Vector2( -450, -570 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://scenes/env/enemy_spawner.tscn"
+icon_class = "Node2D"
+script_path = "res://scripts/env/enemy_spawner.gd"
+script_name = "enemy_spawner.gd"
+
+[node name="FileNode5" type="GraphNode" parent="." instance=ExtResource( 7 )]
+margin_left = 313.608
+margin_top = 335.708
+margin_right = 476.609
+margin_bottom = 367.708
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 9 )
+custom_styles/selectedframe = ExtResource( 10 )
+offset = Vector2( -450, -780 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://scripts/enemy/enemy_texture.gd"
+resource_type = 2
+icon_class = "Script"
+
+[node name="FileNode4" type="GraphNode" parent="." instance=ExtResource( 7 )]
+margin_left = 313.608
+margin_top = 353.708
+margin_right = 451.609
+margin_bottom = 385.708
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 9 )
+custom_styles/selectedframe = ExtResource( 10 )
+offset = Vector2( -450, -750 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://scripts/enemy/enemy_bar.gd"
+resource_type = 2
+icon_class = "Script"
+
+[node name="FileNode27" type="GraphNode" parent="." instance=ExtResource( 7 )]
+margin_left = 475.608
+margin_top = 209.708
+margin_right = 595.608
+margin_bottom = 271.708
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 9 )
+custom_styles/selectedframe = ExtResource( 10 )
+offset = Vector2( -180, -990 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://scenes/enemy/crabby.tscn"
+icon_class = "KinematicBody2D"
+script_path = "res://scripts/enemy/crabby/crabby.gd"
+script_name = "crabby.gd"
+
+[node name="FileNode30" type="GraphNode" parent="." instance=ExtResource( 7 )]
+margin_left = 475.608
+margin_top = 245.708
+margin_right = 587.608
+margin_bottom = 277.708
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 9 )
+custom_styles/selectedframe = ExtResource( 10 )
+offset = Vector2( -180, -930 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://scripts/enemy/crabby/texture.gd"
+resource_type = 2
+icon_class = "Script"
+
+[node name="FileNode28" type="GraphNode" parent="." instance=ExtResource( 7 )]
+margin_left = 475.608
+margin_top = 281.708
+margin_right = 610.609
+margin_bottom = 343.708
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 9 )
+custom_styles/selectedframe = ExtResource( 10 )
+offset = Vector2( -180, -870 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://scenes/enemy/pink_star.tscn"
+icon_class = "KinematicBody2D"
+script_path = "res://scripts/enemy/pink_star/pink_star.gd"
+script_name = "pink_star.gd"
+
+[node name="FileNode31" type="GraphNode" parent="." instance=ExtResource( 7 )]
+margin_left = 475.608
+margin_top = 317.708
+margin_right = 587.609
+margin_bottom = 349.708
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 9 )
+custom_styles/selectedframe = ExtResource( 10 )
+offset = Vector2( -180, -810 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://scripts/enemy/pink_star/texture.gd"
+resource_type = 2
+icon_class = "Script"
+
+[node name="FileNode29" type="GraphNode" parent="." instance=ExtResource( 7 )]
+margin_left = 475.608
+margin_top = 353.708
+margin_right = 589.609
+margin_bottom = 415.708
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 9 )
+custom_styles/selectedframe = ExtResource( 10 )
+offset = Vector2( -180, -750 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://scenes/enemy/whale.tscn"
+icon_class = "KinematicBody2D"
+script_path = "res://scripts/enemy/whale/whale.gd"
+script_name = "whale.gd"
+
+[node name="FileNode32" type="GraphNode" parent="." instance=ExtResource( 7 )]
+margin_left = 475.608
+margin_top = 389.708
+margin_right = 587.609
+margin_bottom = 421.708
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 9 )
+custom_styles/selectedframe = ExtResource( 10 )
+offset = Vector2( -180, -690 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://scripts/enemy/whale/texture.gd"
+resource_type = 2
+icon_class = "Script"
+
+[node name="FileNode3" type="GraphNode" parent="." instance=ExtResource( 7 )]
+margin_left = 313.608
+margin_top = 245.708
+margin_right = 498.609
+margin_bottom = 307.708
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 9 )
+custom_styles/selectedframe = ExtResource( 10 )
+offset = Vector2( -450, -930 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://scenes/enemy/enemy_template.tscn"
+icon_class = "KinematicBody2D"
+script_path = "res://scripts/enemy/enemy_template.gd"
+script_name = "enemy_template.gd"
+
+[node name="FileNode21" type="GraphNode" parent="." instance=ExtResource( 7 )]
+margin_left = 295.609
+margin_top = 533.708
+margin_right = 404.609
+margin_bottom = 565.708
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 9 )
+custom_styles/selectedframe = ExtResource( 10 )
+offset = Vector2( -480, -450 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://scenes/env/mask.tscn"
+icon_class = "CanvasModulate"
+
+[node name="FileNode23" type="GraphNode" parent="." instance=ExtResource( 7 )]
+margin_left = 295.609
+margin_top = 551.708
+margin_right = 424.609
+margin_bottom = 583.708
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 9 )
+custom_styles/selectedframe = ExtResource( 10 )
+offset = Vector2( -480, -420 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://scenes/env/vignette.tscn"
+icon_class = "Node"
+
+[node name="FileNode20" type="GraphNode" parent="." instance=ExtResource( 7 )]
+margin_left = 187.609
+margin_top = 515.708
+margin_right = 344.609
+margin_bottom = 577.708
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 9 )
+custom_styles/selectedframe = ExtResource( 10 )
+offset = Vector2( -660, -480 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://scenes/env/floating_text.tscn"
+icon_class = "Label"
+script_path = "res://scripts/env/floating_text.gd"
+script_name = "floating_text.gd"
+
+[node name="FileNode2" type="GraphNode" parent="." instance=ExtResource( 7 )]
+margin_left = 565.608
+margin_top = 569.708
+margin_right = 661.608
+margin_bottom = 601.708
+rect_scale = Vector2( 0.6, 0.6 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 9 )
+custom_styles/selectedframe = ExtResource( 10 )
+offset = Vector2( -30, -390 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://scenes/effect/general_effects/fog.tscn"
+icon_class = "CanvasLayer"
+
+[connection signal="delete_nodes_request" from="." to="." method="_on_GraphEdit_delete_nodes_request"]
