@@ -21,7 +21,7 @@ func animate(direction: Vector2) -> void:
 	if player.is_damaged():
 		hit_behavior()
 	elif player.dashing or player.rolling or player.attacking or player.defending or player.crouching or player.next_to_wall():
-		action_behavior()
+		action_behavior(direction)
 	elif direction.y != 0: 
 		vertical_behavior(direction)
 	elif player.landing == true: 
@@ -63,13 +63,17 @@ func horizontal_behavior(direction: Vector2) -> void:
 	else:
 		animation.play("idle")
 
-func action_behavior() -> void:
+func action_behavior(direction: Vector2) -> void:
 	if player.rolling:
 		animation.play("roll")
 	elif player.dashing:
 		animation.play("dash")
 	elif player.next_to_wall():
-		animation.play("wall_slid")
+		print(direction.y)
+		if direction.y < 0:
+			animation.play("jump")
+		else:
+			animation.play("wall_slid")
 	elif player.attacking:
 		if normal_attack:
 			animation.play("attack" + suffix)
@@ -153,8 +157,8 @@ func _on_animation_finished(anim_name: String):
 			player.rolling = false
 		
 		"dash":
-			if player.crouching:
-				animation.play("crouch")
-
+			if player.crouching: animation.play("crouch")
+			if player.attacking: player.attacking = false
+	
 		"death":
 			emit_signal("game_over")

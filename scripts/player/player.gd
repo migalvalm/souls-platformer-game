@@ -31,9 +31,10 @@ var can_track_input: bool = true
 
 export(int) var speed
 export(int) var jump_speed
+export(int) var double_jump_speed
 export(int) var roll_speed
 export(int) var dash_speed
-export(int) var dash_length
+export(float) var dash_length
 export(int) var wall_jump_speed
 
 export(int) var wall_gravity
@@ -51,9 +52,17 @@ func _physics_process(delta: float):
 	horizontal_movement_env()
 	vertical_movement_env()
 	actions_env()
+	physics_env(delta)
 	
+func physics_env(delta: float) -> void:
 	gravity(delta)
-	velocity = move_and_slide(velocity, Vector2.UP)
+	
+	if dashing:
+		velocity.x = dash_speed * direction
+		velocity = move_and_slide(velocity, Vector2.UP)
+	else:
+		velocity = move_and_slide(velocity, Vector2.UP)
+	
 	player_sprite.animate(velocity)
 
 func horizontal_movement_env() -> void:
@@ -66,16 +75,20 @@ func horizontal_movement_env() -> void:
 func vertical_movement_env() -> void:
 	if is_on_floor() or is_on_wall(): 
 		jump_count = 0
-
+		
 	if Input.is_action_just_pressed("jump") and jump_count < 2 and can_move():
 		jump_count += 1
 
 		spawn_effect("res://scenes/effect/dust/jump.tscn", Vector2(0,30), is_flipped())
-		if next_to_wall() and not is_on_floor():
+		if next_to_wall() and not is_on_floor():	
 			velocity.y = wall_jump_speed
 			velocity.x += wall_impulse_speed * direction
 		else:
-			velocity.y = jump_speed
+			if jump_count == 1:
+				velocity.y = jump_speed
+			elif jump_count == 2:
+				velocity.y += double_jump_speed
+	
 
 func actions_env() -> void:
 	if rolling:
@@ -141,13 +154,14 @@ func roll() -> void:
 		velocity.x = roll_speed * direction
 
 func dash() -> void:
-	var dash_condition: bool = not dashing and not rolling and player_dash.dash_count > 0
+	var dash_condition: bool = not attacking and not dashing and not rolling and player_dash.dash_count > 0
 	if Input.is_action_pressed("roll") and dash_condition:
-		player_dash.start_dash(0.2)
+		player_dash.start_dash(player_sprite, dash_length)
 		dashing = true
 		
-		player_dash.spawn_dash_effect(Vector2(0,20), is_flipped())
-		velocity.x = dash_speed * direction
+		player_dash.spawn_dash_ghost()
+		player_dash.spawn_dash_effect(Vector2(10 * direction,20), is_flipped())
+		
 
 func can_move() -> bool:
 	return can_track_input and not attacking
@@ -156,7 +170,7 @@ func gravity(delta: float) -> void:
 	if next_to_wall():
 		velocity.y += wall_gravity * delta
 		if velocity.y >= wall_gravity:
-			velocity.y = player_gravity
+			velocity.y = wall_gravity + 40
 	else:
 		velocity.y += delta * player_gravity
 		if velocity.y >= player_gravity:
@@ -201,3 +215,4 @@ func is_flipped() -> bool:
 
 func get_input_direction() -> float:
 	return  Input.get_axis("left", "right")
+

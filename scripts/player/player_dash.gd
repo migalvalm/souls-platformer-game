@@ -5,9 +5,11 @@ var insert_roll: bool = false
 var dash_list: Array = []
 var dash_count: int = 1
 
+export(PackedScene) var ghost_effect = preload("res://scenes/effect/general_effects/ghost.tscn")
 export(NodePath) onready var player = get_node(player) as KinematicBody2D
 
 onready var dash_timer : Timer = $DashTimer
+var sprite: Sprite
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_released("roll") and player.dashing:
@@ -18,10 +20,12 @@ func _physics_process(delta: float) -> void:
 		player.rolling = true
 		dash_list = []
 
-func start_dash(dur: float) -> void:
+func start_dash(sprite: Sprite, dur: float) -> void:
+	self.sprite = sprite
 	dash_timer.wait_time = dur
 	dash_count -= 1
 	dash_timer.start()
+	
 
 func on_dash_timer_timeout() -> void:
 	player.dashing = false
@@ -35,6 +39,16 @@ func on_dash_timer_timeout() -> void:
 	dash_count += 1
 
 ## Helpers
+
+func spawn_dash_ghost():
+	var ghost: Sprite = ghost_effect.instance()
+	get_parent().get_parent().add_child(ghost)
+	
+	ghost.global_position = global_position
+	ghost.texture = sprite.texture
+	ghost.vframes = sprite.vframes
+	ghost.hframes = sprite.hframes
+	ghost.flip_h = sprite.flip_h
 
 func spawn_dash_effect(offset: Vector2, is_flipped: bool) -> void:
 	var effect_instance: EffectTemplate = load("res://scenes/effect/dust/dash.tscn").instance()
