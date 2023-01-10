@@ -93,11 +93,13 @@ func empty_slot(index: int) -> void:
 
 #Helpers
 func aggregate_item_search(item_name: String, item_image: StreamTexture, item_info: Array) -> bool:
+	# Normal index search from 0...i
 	var existing_item_index: int = slot_list.find(item_name)
 	if existing_item_index != -1:
 		if allocate_slot(existing_item_index, item_name, item_image, item_info):
 			return true
-		
+	
+	# Reverse index search from i...0
 	var aux_item_index: int = slot_list.find_last(item_name)
 	if aux_item_index != -1:
 		if allocate_slot(aux_item_index, item_name, item_image, item_info):
