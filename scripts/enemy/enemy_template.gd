@@ -143,6 +143,6 @@ func spawn_effect() -> void:
 	effect_instance.global_position = global_position
 	effect_instance.play_effect()
 	yield(
-		get_tree().create_timer(0.5),
+		get_tree().create_timer(0.2),
 		"timeout"
 	)

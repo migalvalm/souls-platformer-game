@@ -1287,15 +1287,13 @@ anims/wall_slid = SubResource( 13 )
 
 [node name="LevelCamera" type="Camera2D" parent="."]
 current = true
-zoom = Vector2( 0.8, 0.8 )
+zoom = Vector2( 0.9, 0.9 )
 process_mode = 0
 limit_left = 0
 limit_top = 0
 limit_smoothed = true
-drag_margin_h_enabled = true
-drag_margin_v_enabled = true
 smoothing_enabled = true
-smoothing_speed = 15.0
+smoothing_speed = 10.0
 editor_draw_limits = true
 editor_draw_drag_margin = true
 
@@ -1341,9 +1339,9 @@ player = NodePath("..")
 
 [node name="Light" type="Light2D" parent="."]
 texture = ExtResource( 20 )
-color = Color( 0.596078, 0.545098, 0.545098, 1 )
-energy = 0.5
-mode = 1
+texture_scale = 0.2
+color = Color( 1, 1, 1, 0.160784 )
+energy = 1.2
 
 [connection signal="animation_finished" from="Animation" to="Texture" method="_on_animation_finished"]
 [connection signal="area_entered" from="CollisionArea" to="Stats" method="on_collision_area_entered"]
