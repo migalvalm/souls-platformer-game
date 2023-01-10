@@ -15,7 +15,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_released("roll") and player.dashing:
 		dash_list.append("release")
 	
-	if Input.is_action_pressed("roll") and dash_list.has("release") and player.dashing:
+	if Input.is_action_pressed("roll") and dash_list.has("release"):
 		player.spawn_effect("res://scenes/effect/dust/roll.tscn", Vector2(0,22), player.is_flipped())
 		player.rolling = true
 		dash_list = []

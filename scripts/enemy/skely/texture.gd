@@ -1,0 +1,2 @@
+extends EnemyTexture
+class_name SkelyTexture

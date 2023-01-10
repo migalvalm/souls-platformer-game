@@ -99,6 +99,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/management/level.gd"
 }, {
+"base": "Level",
+"class": "LevelOne",
+"language": "GDScript",
+"path": "res://scripts/management/level_1.gd"
+}, {
 "base": "RigidBody2D",
 "class": "PhysicItem",
 "language": "GDScript",
@@ -130,6 +135,16 @@ _global_script_classes=[ {
 "path": "res://scripts/player/player_texture.gd"
 }, {
 "base": "EnemyTemplate",
+"class": "Skely",
+"language": "GDScript",
+"path": "res://scripts/enemy/skely/skely.gd"
+}, {
+"base": "EnemyTexture",
+"class": "SkelyTexture",
+"language": "GDScript",
+"path": "res://scripts/enemy/skely/texture.gd"
+}, {
+"base": "EnemyTemplate",
 "class": "Whale",
 "language": "GDScript",
 "path": "res://scripts/enemy/whale/whale.gd"
@@ -158,12 +173,15 @@ _global_script_class_icons={
 "FloatText": "",
 "Ghost": "",
 "Level": "",
+"LevelOne": "",
 "PhysicItem": "",
 "PinkStar": "",
 "PinkStarTexture": "",
 "Player": "",
 "PlayerStats": "",
 "PlayerTexture": "",
+"Skely": "",
+"SkelyTexture": "",
 "Whale": "",
 "WhaleTexture": ""
 }
@@ -171,8 +189,12 @@ _global_script_class_icons={
 [application]
 
 config/name="AdvancedPlatformer"
-run/main_scene="res://scenes/management/level.tscn"
+run/main_scene="res://scenes/management/level_1.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+SoundPlayer="*res://singletones/scenes/sound/sound_player.tscn"
 
 [debug]
 
@@ -182,8 +204,6 @@ settings/stdout/print_fps=true
 
 window/size/width=320
 window/size/height=180
-window/size/resizable=false
-window/size/borderless=true
 window/size/test_width=1280
 window/size/test_height=720
 window/stretch/mode="2d"

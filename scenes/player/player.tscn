@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://v2_assets/player/_Idle.png" type="Texture" id=1]
 [ext_resource path="res://scripts/player/player.gd" type="Script" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://v2_assets/player/_Roll.png" type="Texture" id=17]
 [ext_resource path="res://v2_assets/player/_Dash.png" type="Texture" id=18]
 [ext_resource path="res://scenes/player/player_dash.tscn" type="PackedScene" id=19]
+[ext_resource path="res://assets/effect/light.png" type="Texture" id=20]
 
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 12.5, 23.4375 )
@@ -1244,7 +1245,7 @@ dash_speed = 250
 dash_length = 0.2
 wall_jump_speed = -160
 wall_gravity = 70
-player_gravity = 150
+player_gravity = 200
 wall_impulse_speed = 400
 magic_attack_cost = 5
 
@@ -1257,6 +1258,7 @@ player = NodePath("..")
 attack_collision = NodePath("../AttackArea/Collision")
 
 [node name="Collision" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( -6.25, 21.25 )
 scale = Vector2( 0.8, 0.8 )
 shape = SubResource( 7 )
@@ -1285,12 +1287,10 @@ anims/wall_slid = SubResource( 13 )
 
 [node name="LevelCamera" type="Camera2D" parent="."]
 current = true
-zoom = Vector2( 1.1, 1.1 )
+zoom = Vector2( 0.8, 0.8 )
 process_mode = 0
-limit_left = 32
-limit_top = 30
-limit_right = 1825
-limit_bottom = 1408
+limit_left = 0
+limit_top = 0
 limit_smoothed = true
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
@@ -1308,6 +1308,7 @@ cast_to = Vector2( 6, 0 )
 collision_mask = 3
 
 [node name="AttackArea" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 8
 
@@ -1316,6 +1317,7 @@ scale = Vector2( 0.999999, 0.999999 )
 shape = SubResource( 8 )
 
 [node name="CollisionArea" type="Area2D" parent="."]
+visible = false
 collision_layer = 4
 collision_mask = 0
 
@@ -1336,6 +1338,11 @@ one_shot = true
 [node name="PlayerDash" parent="." instance=ExtResource( 19 )]
 position = Vector2( -1, 0 )
 player = NodePath("..")
+
+[node name="Light" type="Light2D" parent="."]
+texture = ExtResource( 20 )
+color = Color( 0.596078, 0.545098, 0.545098, 1 )
+energy = 0.5
 
 [connection signal="animation_finished" from="Animation" to="Texture" method="_on_animation_finished"]
 [connection signal="area_entered" from="CollisionArea" to="Stats" method="on_collision_area_entered"]

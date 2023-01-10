@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scripts/enemy/skely/texture.gd" type="Script" id=1]
+[ext_resource path="res://scripts/enemy/skely/skely.gd" type="Script" id=2]
+[ext_resource path="res://scenes/enemy/enemy_template.tscn" type="PackedScene" id=3]
+
+[node name="Skely" instance=ExtResource( 3 )]
+script = ExtResource( 2 )
+floating_text = null
+
+[node name="Texture" parent="." index="1"]
+script = ExtResource( 1 )
+attack_area_collision = NodePath("")
+animation = NodePath("")
+enemy = NodePath("")

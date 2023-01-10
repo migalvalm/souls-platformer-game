@@ -9,7 +9,7 @@ uniform float softness = 3.0;
 
 void fragment()
 {
-	float value = distance(UV, vec2(0.5, 0.6));
+	float value = distance(UV, vec2(0.5, 0.5));
 	COLOR = vec4(color.rgb, smoothstep(multiplier, softness, value));
 }"
 
@@ -27,3 +27,4 @@ shader_param/softness = 0.6
 material = SubResource( 2 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+rect_rotation = 0.0144816
