@@ -1343,6 +1343,7 @@ player = NodePath("..")
 texture = ExtResource( 20 )
 color = Color( 0.596078, 0.545098, 0.545098, 1 )
 energy = 0.5
+mode = 1
 
 [connection signal="animation_finished" from="Animation" to="Texture" method="_on_animation_finished"]
 [connection signal="area_entered" from="CollisionArea" to="Stats" method="on_collision_area_entered"]

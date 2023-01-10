@@ -44,6 +44,12 @@ color = Color( 0.156863, 0.156863, 0.156863, 0.854902 )
 [node name="Lamp" parent="Design" instance=ExtResource( 10 )]
 position = Vector2( 137, -252 )
 
+[node name="Lamp2" parent="Design" instance=ExtResource( 10 )]
+position = Vector2( -12, -255 )
+
+[node name="Lamp3" parent="Design" instance=ExtResource( 10 )]
+position = Vector2( 279, -255 )
+
 [node name="Floor" type="TileMap" parent="Design"]
 z_index = 1
 tile_set = ExtResource( 3 )
@@ -117,3 +123,13 @@ layer = 2
 
 [node name="Player" parent="." instance=ExtResource( 6 )]
 position = Vector2( -224, -309 )
+
+[node name="Enemy2" type="Node" parent="."]
+
+[node name="EnemySpawner" parent="Enemy2" instance=ExtResource( 8 )]
+position = Vector2( 681, 172 )
+enemies_list = [ [ "res://scenes/enemy/whale.tscn", -1.0, 1.0, 100 ], [ "res://scenes/enemy/crabby.tscn", -1, 1, 100 ] ]
+spawn_cooldown = 5.0
+enemy_amount = 2
+left_gap_position = -70
+right_gap_position = 55
