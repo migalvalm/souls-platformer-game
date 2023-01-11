@@ -37,7 +37,7 @@ script = ExtResource( 7 )
 [node name="Fog" parent="Shaders" instance=ExtResource( 11 )]
 
 [node name="Mask" parent="Shaders" instance=ExtResource( 5 )]
-color = Color( 0.156863, 0.156863, 0.156863, 0.854902 )
+color = Color( 0.145098, 0.133333, 0.172549, 0.854902 )
 
 [node name="Design" type="Node2D" parent="."]
 
@@ -80,43 +80,6 @@ tile_data = PoolIntArray( -1048599, 2, 0, -1048598, 2, 0, -1048596, 2, 0, -10485
 
 [node name="Environment" type="WorldEnvironment" parent="."]
 environment = SubResource( 1 )
-
-[node name="Enemy" type="Node" parent="."]
-
-[node name="EnemySpawner" parent="Enemy" instance=ExtResource( 8 )]
-position = Vector2( 397, 238 )
-enemies_list = [ [ "res://scenes/enemy/whale.tscn", -1.0, 1.0, 100 ], [ "res://scenes/enemy/crabby.tscn", -1, 1, 100 ] ]
-spawn_cooldown = 5.0
-enemy_amount = 2
-left_gap_position = -70
-right_gap_position = 55
-
-[node name="EnemySpawner2" parent="Enemy" instance=ExtResource( 8 )]
-position = Vector2( 1555, 943 )
-enemies_list = [ [ "res://scenes/enemy/pink_star.tscn", -10, 1, 100 ] ]
-spawn_cooldown = 5.0
-enemy_amount = 1
-left_gap_position = -30
-right_gap_position = 30
-can_respawn = true
-
-[node name="EnemySpawner3" parent="Enemy" instance=ExtResource( 8 )]
-position = Vector2( 449, 1204 )
-enemies_list = [ [ "res://scenes/enemy/crabby.tscn", -2, 1, 100 ] ]
-spawn_cooldown = 5.0
-enemy_amount = 3
-left_gap_position = -30
-right_gap_position = 30
-can_respawn = true
-
-[node name="EnemySpawner4" parent="Enemy" instance=ExtResource( 8 )]
-position = Vector2( 1404, 1205 )
-enemies_list = [ [ "res://scenes/enemy/crabby.tscn", -2, 1, 100 ] ]
-spawn_cooldown = 5.0
-enemy_amount = 3
-left_gap_position = -30
-right_gap_position = 30
-can_respawn = true
 
 [node name="Hud" parent="." instance=ExtResource( 9 )]
 layer = 2
