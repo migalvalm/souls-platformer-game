@@ -2,7 +2,7 @@ extends TextureRect
 class_name InterfaceItem
 
 signal empty_slot
-# signal item_clicked
+signal item_clicked
 
 onready var item_texture: TextureRect = get_node("ItemTexture")
 onready var item_amount: Label = get_node("Amount")
@@ -79,10 +79,25 @@ func update_item(item: String, item_image: StreamTexture, item_info: Array) -> v
 	if !stackable_item_types.has(item_type):
 		item_texture.show()
 
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("click") and can_click and item_name != "":
+		emit_signal("item_clicked", item_index)
+		
+		modulate.a = 0.2
+		yield(get_tree().create_timer(0.1), "timeout")
+		modulate.a = 0.5
+	
 func update_slot() -> void:
 	clear_item()
 	emit_signal("empty_slot", item_index)
 	
+func update_amount(value: int) -> void:
+	var new_amount: int = amount - value
+	item_amount.text = str(new_amount)
+	amount = new_amount
+	
+	if new_amount == 0:
+		update_slot()
 #Helpers
 func clear_item():
 	item_amount.hide()

@@ -1,10 +1,132 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=15 format=2]
 
-[ext_resource path="res://assets/interface/intentory/inventory_text.png" type="Texture" id=1]
-[ext_resource path="res://assets/interface/intentory/inventory_background.png" type="Texture" id=2]
-[ext_resource path="res://assets/interface/intentory/inventory_text_background.png" type="Texture" id=3]
+[ext_resource path="res://assets/interface/inventory/inventory_text.png" type="Texture" id=1]
+[ext_resource path="res://assets/interface/inventory/inventory_background.png" type="Texture" id=2]
+[ext_resource path="res://assets/interface/inventory/inventory_text_background.png" type="Texture" id=3]
 [ext_resource path="res://scenes/interface/player/inventory/item.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scripts/interface/player/inventory_container.gd" type="Script" id=5]
+[ext_resource path="res://assets/interface/inventory/aux_background.png" type="Texture" id=6]
+[ext_resource path="res://assets/interface/inventory/text/delete_text.png" type="Texture" id=7]
+[ext_resource path="res://assets/interface/inventory/text/equip_text.png" type="Texture" id=8]
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 100, 60 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "hide_container"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 100, 110 ), Vector2( 100, 60 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "show_container"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 100, 60 ), Vector2( 100, 110 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -90,9 +212,49 @@ tracks/1/keys = {
 }
 
 [node name="InventoryContainer" type="Control" groups=["inventory"]]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 5 )
+
+[node name="Container" type="TextureRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -60.0
+margin_top = -30.0
+margin_right = 60.0
+margin_bottom = 30.0001
+texture = ExtResource( 6 )
+
+[node name="Animation" type="AnimationPlayer" parent="Container"]
+anims/RESET = SubResource( 4 )
+anims/hide_container = SubResource( 6 )
+anims/show_container = SubResource( 5 )
+
+[node name="HContainer" type="HBoxContainer" parent="Container"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -39.0
+margin_top = -15.0001
+margin_right = 39.0
+margin_bottom = -9.00012
+rect_min_size = Vector2( 78, 6 )
+custom_constants/separation = 10
+
+[node name="Equip" type="TextureRect" parent="Container/HContainer"]
+margin_right = 31.0
+margin_bottom = 6.0
+texture = ExtResource( 8 )
+
+[node name="Delete" type="TextureRect" parent="Container/HContainer"]
+margin_left = 41.0
+margin_right = 78.0
+margin_bottom = 6.0
+texture = ExtResource( 7 )
 
 [node name="VContainer" type="VBoxContainer" parent="."]
 anchor_left = 0.5

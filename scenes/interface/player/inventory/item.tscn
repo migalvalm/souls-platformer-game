@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://assets/interface/intentory/item_background/type_1.png" type="Texture" id=1]
+[ext_resource path="res://assets/interface/inventory/item_background/type_1.png" type="Texture" id=1]
 [ext_resource path="res://assets/item/consumable/health_potion.png" type="Texture" id=2]
 [ext_resource path="res://assets/font/bit_potion.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://scripts/player/item.gd" type="Script" id=4]

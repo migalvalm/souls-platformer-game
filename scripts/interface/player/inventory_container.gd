@@ -3,6 +3,8 @@ class_name InventoryContainer
 
 onready var slot_container: GridContainer = get_node("VContainer/Background/GridContainer")
 onready var animation: AnimationPlayer = get_node("Animation")
+onready var aux_animation: AnimationPlayer = get_node("Container/Animation")
+onready var aux_h_container: HBoxContainer = get_node("Container/HContainer") 
 
 var current_state: String
 var can_click: bool = false
@@ -72,8 +74,26 @@ var slot_item_info: Array = [
 ]
 
 func _ready() -> void:
+	for icon in aux_h_container.get_children():
+		icon.connect("mouse_exited", self, "mouse_interaction", ["exited", icon])
+		icon.connect("mouse_entered", self, "mouse_interaction", ["entered", icon])
+		
 	for children in slot_container.get_children():
+		children.connect("item_clicked", self, "on_item_clicked")
 		children.connect("empty_slot", self, "empty_slot")
+
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("click") and can_click and current_state != "":
+		match current_state:
+			"Equip":
+				#TODO
+				#slot_container.get_child(item_index).equip_item()
+				pass
+			"Delete":
+				slot_container.get_child(item_index).update_slot()
+		item_index = -1
+		current_state = ""
+		aux_animation.play("hide_container")
 
 func update_slot(item_name: String, item_image: StreamTexture, item_info: Array)-> void:
 	if aggregate_item_search(item_name, item_image, item_info):
@@ -104,7 +124,6 @@ func aggregate_item_search(item_name: String, item_image: StreamTexture, item_in
 	if aux_item_index != -1:
 		if allocate_slot(aux_item_index, item_name, item_image, item_info):
 			return true
-
 	return false
 
 func allocate_slot(item_index: int, item_name: String, item_image: StreamTexture, item_info: Array) -> bool:
@@ -126,3 +145,28 @@ func allocate_slot(item_index: int, item_name: String, item_image: StreamTexture
 		return true
 		
 	return false
+
+func reset() -> void:
+	item_index = -1
+	can_click = false
+	current_state = ""
+	aux_animation.play("hide_container")
+	for children in slot_container.get_children():
+		children.reset()
+
+func on_item_clicked(index: int) -> void:
+	aux_animation.play("show_container")
+	item_index = index
+	
+	
+func mouse_interaction(state: String, object: TextureRect) -> void:
+	match state:
+		"entered":
+			can_click = true
+			object.modulate.a = 0.5
+			current_state = object.name
+			
+		"exited":
+			can_click = false
+			current_state = ""
+			object.modulate.a = 1.0
