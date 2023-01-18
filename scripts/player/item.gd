@@ -19,9 +19,9 @@ var amount: int = 0
 var can_click: bool = false
 
 var texture_list: Array = [
-	"res://assets/interface/intentory/item_background/type_1.png",
-	"res://assets/interface/intentory/item_background/type_2.png",
-	"res://assets/interface/intentory/item_background/type_3.png",
+	"res://assets/interface/inventory/item_background/type_1.png",
+	"res://assets/interface/inventory/item_background/type_2.png",
+	"res://assets/interface/inventory/item_background/type_3.png",
 ]
 
 var stackable_item_types = ["Resource", "Health", "Mana"]
